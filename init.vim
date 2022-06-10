@@ -35,7 +35,6 @@ Plug 'ray-x/guihua.lua', { 'do': 'cd lua/fzy && make' }
 Plug 'ray-x/navigator.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-project.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'pianocomposer321/consolation.nvim'
 Plug 'tpope/vim-dispatch'
@@ -45,13 +44,13 @@ Plug 'SirVer/ultisnips'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
 lua << EOF
 
 require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "vendor" } } }
-require('telescope').load_extension('project')
 require('telescope').load_extension('file_browser')
 
 require('nvim-autopairs').setup{
@@ -122,6 +121,8 @@ let g:gruvbox_italics = 1
 let g:airline_powerline_fonts = 1
 let g:UltiSnipsExpandTrigger = '<C-e>'
 let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
+let g:startify_session_persistence = 1
+let g:startify_change_to_vcs_root = 1
 
 colorscheme gruvbox
 
@@ -132,7 +133,6 @@ nnoremap ,+ :vertical resize +5<CR>
 nnoremap ,- :vertical resize -5<CR>
 nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 tnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
-nnoremap ,p <Cmd>lua require('telescope').extensions.project.project{}<CR>
 nnoremap ,f :Telescope file_browser<CR>
 nnoremap ,q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap ,l <Cmd>call ToggleLocationList()<CR>

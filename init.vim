@@ -129,6 +129,7 @@ colorscheme gruvbox
 nnoremap <C-a> :A<CR>
 nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
+nnoremap ,s :Startify<CR>
 nnoremap ,+ :vertical resize +5<CR>
 nnoremap ,- :vertical resize -5<CR>
 nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>

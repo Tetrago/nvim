@@ -41,6 +41,10 @@ Plug 'pianocomposer321/consolation.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'igemnace/vim-makery'
 Plug 'godlygeek/tabular'
+Plug 'SirVer/ultisnips'
+Plug 'mfussenegger/nvim-dap'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'lewis6991/spellsitter.nvim'
 
 call plug#end()
 
@@ -70,9 +74,11 @@ require('nvim-treesitter.configs').setup{
 		enable = true
 	},
 	indent = {
-		enable = true
+		enable = false
 	}
 }
+
+require('spellsitter').setup()
 
 require('navigator').setup({
 	lsp_signature_help = true,
@@ -81,10 +87,41 @@ require('navigator').setup({
 	}
 })
 
+require('dap').adapters.cppdbg = {
+	id = 'cppdbg',
+	type = 'executable',
+	command = vim.fn.stdpath('config') .. '\\cpptools\\debugAdapters\\bin\\OpenDebugAD7.exe',
+	options = {
+		detached = false
+	}
+}
+
+require('dap').configurations.cpp = {
+	{
+		name = 'Launch file',
+		type = 'cppdbg',
+		request = 'launch',
+		program = function() return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file') end,
+		cwd = '${workspaceFolder}',
+		stopOnEntry = true,
+		setupCommands = {
+			{
+				text = '-enable-pretty-printing',
+				description = 'Enable pretty printing',
+				ignoreFailures = false
+			}
+		}
+	}
+}
+
+require('nvim-dap-virtual-text').setup()
+
 EOF
 
 let g:gruvbox_italics = 1
 let g:airline_powerline_fonts = 1
+let g:UltiSnipsExpandTrigger = '<C-e>'
+let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
 
 colorscheme gruvbox
 
@@ -101,8 +138,13 @@ nnoremap ,q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap ,l <Cmd>call ToggleLocationList()<CR>
 nnoremap ,Ti :TSInstall
 nnoremap ,Tu :TSUpdate<CR>
+nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
 nnoremap <F6> :Mbuild<CR>
-nnoremap <F5> <Cmd>lua require('yabs'):run_task('run')<CR>
+nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
+nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
+nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
+nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>
+nnoremap <F12> <Cmd>lua require('dap').step_out()<CR>
 nnoremap <C-k> <Cmd>lua require('telescope.builtin').find_files{}<CR>
 nnoremap <C-f> <Cmd>lua require('telescope.builtin').treesitter{}<CR>
 inoremap <TAB> <Cmd>call pum#map#insert_relative(+1)<CR>
@@ -117,6 +159,8 @@ set autoread
 set termguicolors
 set encoding=utf8
 set nowrap
+set spell
+set autoindent
 
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])

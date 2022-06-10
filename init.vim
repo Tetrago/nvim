@@ -141,6 +141,7 @@ nnoremap ,Tu :TSUpdate<CR>
 nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
 nnoremap <F6> :Mbuild<CR>
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
+nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>
 nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
 nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
 nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>

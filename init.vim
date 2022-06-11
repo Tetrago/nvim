@@ -26,6 +26,7 @@ Plug 'milkypostman/vim-togglelist'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'vim-scripts/a.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-surround'
@@ -42,6 +43,7 @@ Plug 'ray-x/navigator.lua'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'pianocomposer321/consolation.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'igemnace/vim-makery'
@@ -50,21 +52,31 @@ Plug 'SirVer/ultisnips'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
-Plug 'glepnir/dashboard-nvim'
+Plug 'Shatur/neovim-session-manager'
+Plug 'goolord/alpha-nvim'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'lewis6991/impatient.nvim'
 
 call plug#end()
 
 lua << EOF
 
+local Path = require('plenary.path')
+
+require('impatient')
+
 require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "vendor" } } }
 require('telescope').load_extension('file_browser')
+require('telescope').load_extension('ui-select')
 
 require('nvim-autopairs').setup{
 	disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" }
 }
+
 require('lspconfig').clangd.setup{}
+
 require('FTerm').setup({ border = 'rounded', dimensions = { width = 0.8, height = 0.8 }, cmd = 'powershell.exe -nologo' })
+
 require('lsp_signature').setup({
 	bind = true,
 	handler_opts = { border = 'rounded' },
@@ -96,7 +108,7 @@ require('navigator').setup({
 require('dap').adapters.cppdbg = {
 	id = 'cppdbg',
 	type = 'executable',
-	command = vim.fn.stdpath('config') .. '\\cpptools\\debugAdapters\\bin\\OpenDebugAD7.exe',
+	command = Path:new(vim.fn.stdpath('config'), 'cpptools/debugAdapters/bin/OpenDebugAD7.exe'),
 	options = {
 		detached = false
 	}
@@ -122,16 +134,41 @@ require('dap').configurations.cpp = {
 
 require('nvim-dap-virtual-text').setup()
 
-vim.g.dashboard_preview_command = 'cat'
-vim.g.dashboard_preview_pipeline = ''
-vim.g.dashboard_preview_file = vim.fn.stdpath('config') .. '/header.cat'
-vim.g.dashboard_preview_file_height = 13
-vim.g.dashboard_preview_file_width = 91
+require('session_manager').setup({
+	sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),
+	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+	autosave_only_in_session = true
+})
 
-if vim.loop.os_uname().sysname == 'Windows_NT' then
-	vim.g.dashboard_preview_command = 'type'
-	vim.g.dashboard_preview_file = vim.fn.stdpath('config') .. '\\header.cat'
+local alpha = require('alpha.themes.startify')
+
+alpha.section.header.val = {
+	[[      _____       _____           _____       _____              ______  _____   ______   ]],
+	[[ ____|\    \  ___|\    \     ____|\    \     /    /|___      ___|\     \|\    \ |\     \  ]],
+	[[|    | \    \|    |\    \   /     /\    \   /    /|    |    |     \     \\\    \| \     \ ]],
+	[[|    |______/|    | |    | /     /  \    \ |\____\|    |    |     ,_____/|\|    \  \     |]],
+	[[|    |----'\ |    |/____/ |     |    |    || |   |/    |___ |     \--'\_|/ |     \  |    |]],
+	[[|    |_____/ |    |\    \ |     |    |    | \|___/    /    ||     /___/|   |      \ |    |]],
+	[[|    |       |    | |    ||\     \  /    /|    /     /|    ||     \____|\  |    |\ \|    |]],
+	[[|____|       |____| |____|| \_____\/____/ |   |_____|/____/||____ '     /| |____||\_____/|]],
+	[[|    |       |    | |    | \ |    ||    | /   |     |    | ||    /_____/ | |    |/ \|   ||]],
+	[[|____|       |____| |____|  \|____||____|/    |_____|____|/ |____|     | / |____|   |___|/]],
+	[[  )/           \(     )/       \(    )/         \(    )/      \( |_____|/    \(       )/  ]],
+	[[  '             '     '         '    '           '    '        '    )/        '       '   ]],
+	[[                                                                    '                     ]],
+}
+
+table.insert(alpha.section.top_buttons.val, alpha.button('l', 'Load last session', ':SessionManager load_last_session<CR>'))
+table.insert(alpha.section.top_buttons.val, alpha.button('L', 'Load session', ':SessionManager load_session<CR>'))
+
+for i, v in pairs(alpha.config.layout) do
+	if v == alpha.section.mru_cwd then
+		alpha.config.layout[i] = nil
+		break
+	end
 end
+
+require('alpha').setup(alpha.config)
 
 EOF
 
@@ -161,6 +198,9 @@ nnoremap ,l <Cmd>call ToggleLocationList()<CR>
 nnoremap ,Ti :TSInstall 
 nnoremap ,Tu :TSUpdate<CR>
 nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
+nnoremap ,ss :SessionManager save_session<CR>
+nnoremap ,sl :SessionManager load_session<CR>
+nnoremap ,sd :SessionManager delete_session<CR>
 nnoremap <F6> :Mbuild<CR>
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
 nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>

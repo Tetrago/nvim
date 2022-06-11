@@ -54,6 +54,7 @@ Plug 'lewis6991/spellsitter.nvim'
 Plug 'mhinz/vim-startify'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
+Plug 'folke/which-key.nvim'
 
 call plug#end()
 
@@ -95,14 +96,16 @@ require('navigator').setup({
 	}
 })
 
-require('dap').adapters.cppdbg = {
-	id = 'cppdbg',
-	type = 'executable',
-	command = Path:new(vim.fn.stdpath('config'), 'cpptools/debugAdapters/bin/OpenDebugAD7.exe'),
-	options = {
-		detached = false
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+	require('dap').adapters.cppdbg = {
+		id = 'cppdbg',
+		type = 'executable',
+		command = Path:new(vim.fn.stdpath('config'), 'cpptools/debugAdapters/bin/OpenDebugAD7.exe'),
+		options = {
+			detached = false
+		}
 	}
-}
+end
 
 require('dap').configurations.cpp = {
 	{
@@ -123,6 +126,21 @@ require('dap').configurations.cpp = {
 }
 
 require('nvim-dap-virtual-text').setup()
+
+require('which-key').setup{
+	marks = false,
+	registers = false,
+	spelling = { enabled = false },
+	presets = {
+		operators = false,
+		motions = false,
+		text_objects = false,
+		windows = true,
+		nav = false,
+		z = false,
+		g = true
+	}
+}
 
 EOF
 
@@ -210,6 +228,7 @@ set encoding=utf8
 set nowrap
 set spell
 set autoindent
+set timeoutlen=0
 
 " ddc
 call ddc#custom#patch_global('completionMenu', 'pum.vim')

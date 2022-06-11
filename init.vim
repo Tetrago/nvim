@@ -128,18 +128,7 @@ require('dap').configurations.cpp = {
 require('nvim-dap-virtual-text').setup()
 
 require('which-key').setup{
-	marks = false,
-	registers = false,
-	spelling = { enabled = false },
-	presets = {
-		operators = false,
-		motions = false,
-		text_objects = false,
-		windows = true,
-		nav = false,
-		z = false,
-		g = true
-	}
+	triggers = { '<Leader>', 'g', '<C-w>' }
 }
 
 EOF
@@ -205,6 +194,11 @@ nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
 nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
 nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>
 nnoremap <F12> <Cmd>lua require('dap').step_out()<CR>
+nnoremap <Leader>dt <Cmd>lua require('dap').stop()<CR>
+nnoremap <Leader>dk <Cmd>lua require('dap').up()<CR>
+nnoremap <Leader>dj <Cmd>lua require('dap').down()<CR>
+nnoremap <Leader>di <Cmd>lua require('dap.ui.widgets').hover()<CR>
+nnoremap <Leader>ds <Cmd>lua local w = require('dap.ui.widgets'); w.centered_float(w.scopes)<CR>
 
 " vim-startify
 nnoremap <Leader>s :Startify<CR>

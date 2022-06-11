@@ -129,7 +129,7 @@ require('nvim-dap-virtual-text').setup()
 EOF
 
 " nvim
-let g:mapleader = '<SPC>'
+let g:mapleader = ' '
 let g:gruvbox_italics = 1
 
 " airline

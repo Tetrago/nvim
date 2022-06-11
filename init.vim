@@ -63,7 +63,7 @@ local Path = require('plenary.path')
 
 require('impatient')
 
-require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "vendor" } } }
+require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
 require('telescope').load_extension('file_browser')
 require('telescope').load_extension('ui-select')
 

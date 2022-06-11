@@ -198,7 +198,7 @@ nnoremap ,l <Cmd>call ToggleLocationList()<CR>
 nnoremap ,Ti :TSInstall 
 nnoremap ,Tu :TSUpdate<CR>
 nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
-nnoremap ,ss :SessionManager save_session<CR>
+nnoremap ,ss :SessionManager save_current_session<CR>
 nnoremap ,sl :SessionManager load_session<CR>
 nnoremap ,sd :SessionManager delete_session<CR>
 nnoremap <F6> :Mbuild<CR>

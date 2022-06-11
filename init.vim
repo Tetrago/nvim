@@ -52,7 +52,7 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'Shatur/neovim-session-manager'
-Plug 'goolord/alpha-nvim'
+Plug 'mhinz/vim-startify'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
 
@@ -133,46 +133,29 @@ require('session_manager').setup({
 	autosave_only_in_session = true
 })
 
-local alpha = require('alpha.themes.startify')
-
-alpha.section.header.val = {
-	[[      _____       _____           _____       _____              ______  _____   ______   ]],
-	[[ ____|\    \  ___|\    \     ____|\    \     /    /|___      ___|\     \|\    \ |\     \  ]],
-	[[|    | \    \|    |\    \   /     /\    \   /    /|    |    |     \     \\\    \| \     \ ]],
-	[[|    |______/|    | |    | /     /  \    \ |\____\|    |    |     ,_____/|\|    \  \     |]],
-	[[|    |----'\ |    |/____/ |     |    |    || |   |/    |___ |     \--'\_|/ |     \  |    |]],
-	[[|    |_____/ |    |\    \ |     |    |    | \|___/    /    ||     /___/|   |      \ |    |]],
-	[[|    |       |    | |    ||\     \  /    /|    /     /|    ||     \____|\  |    |\ \|    |]],
-	[[|____|       |____| |____|| \_____\/____/ |   |_____|/____/||____ '     /| |____||\_____/|]],
-	[[|    |       |    | |    | \ |    ||    | /   |     |    | ||    /_____/ | |    |/ \|   ||]],
-	[[|____|       |____| |____|  \|____||____|/    |_____|____|/ |____|     | / |____|   |___|/]],
-	[[  )/           \(     )/       \(    )/         \(    )/      \( |_____|/    \(       )/  ]],
-	[[  '             '     '         '    '           '    '        '    )/        '       '   ]],
-	[[                                                                    '                     ]],
-}
-
-table.insert(alpha.section.top_buttons.val, alpha.button('l', 'Load last session', ':SessionManager load_last_session<CR>'))
-table.insert(alpha.section.top_buttons.val, alpha.button('L', 'Load session', ':SessionManager load_session<CR>'))
-
-for i, v in pairs(alpha.config.layout) do
-	if v == alpha.section.mru_cwd then
-		alpha.config.layout[i] = nil
-		break
-	end
-end
-
-require('alpha').setup(alpha.config)
-
 EOF
 
 let g:gruvbox_italics = 1
 let g:airline_powerline_fonts = 1
 let g:UltiSnipsExpandTrigger = '<C-e>'
 let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
-let g:dashboard_default_executive = 'telescope'
-let g:dashboard_session_directory = stdpath('data') . '/session'
-let g:dashboard_custom_shortcut = { 'last_session': '', 'find_history': '', 'find_file': '', 'new_file': '', 'change_colorscheme': '', 'find_word': '', 'book_marks': '' }
-let g:better_whitespace_filetypes_blacklist = [ 'dashboard', 'vim' ]
+let g:better_whitespace_filetypes_blacklist = [ 'startify', 'vim' ]
+let g:startify_session_persistence = 1
+
+let g:startify_custom_header = [
+	\"       _____       _____           _____       _____              ______  _____   ______   ",
+	\"  ____|\\    \\  ___|\\    \\     ____|\\    \\     /    /|___      ___|\\     \\|\\    \\ |\\     \\  ",
+	\" |    | \\    \\|    |\\    \\   /     /\\    \\   /    /|    |    |     \\     \\\\\\    \\| \\     \\ ",
+	\" |    |______/|    | |    | /     /  \\    \\ |\\____\\|    |    |     ,_____/|\\|    \\  \\     |",
+	\" |    |----'\\ |    |/____/ |     |    |    || |   |/    |___ |     \\--'\\_|/ |     \\  |    |",
+	\" |    |_____/ |    |\\    \\ |     |    |    | \\|___/    /    ||     /___/|   |      \\ |    |",
+	\" |    |       |    | |    ||\\     \\  /    /|    /     /|    ||     \\____|\\  |    |\\ \\|    |",
+	\" |____|       |____| |____|| \\_____\\/____/ |   |_____|/____/||____ '     /| |____||\\_____/|",
+	\" |    |       |    | |    | \\ |    ||    | /   |     |    | ||    /_____/ | |    |/ \\|   ||",
+	\" |____|       |____| |____|  \\|____||____|/    |_____|____|/ |____|     | / |____|   |___|/",
+	\"   )/           \\(     )/       \\(    )/         \\(    )/      \\( |_____|/    \\(       )/  ",
+	\"   '             '     '         '    '           '    '        '    )/        '       '   ",
+	\"                                                                    '                      "]
 
 colorscheme gruvbox
 
@@ -191,9 +174,8 @@ nnoremap ,l <Cmd>call ToggleLocationList()<CR>
 nnoremap ,Ti :TSInstall 
 nnoremap ,Tu :TSUpdate<CR>
 nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
-nnoremap ,ss :SessionManager save_current_session<CR>
-nnoremap ,sl :SessionManager load_session<CR>
-nnoremap ,sd :SessionManager delete_session<CR>
+nnoremap ,s :Startify<CR>
+nnoremap ,c :SClose<CR>
 nnoremap <F6> :Mbuild<CR>
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
 nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>

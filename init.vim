@@ -1,9 +1,16 @@
-"        _             _       _ _
-"       (_)           (_)     (_) |
-" __   ___ _ __ ___    _ _ __  _| |_
-" \ \ / / | '_ ` _ \  | | '_ \| | __|
-"  \ V /| | | | | | |_| | | | | | |_
-"   \_/ |_|_| |_| |_(_)_|_| |_|_|\__|
+"       _____       _____           _____       _____              ______  _____   ______   
+"  ____|\    \  ___|\    \     ____|\    \     /    /|___      ___|\     \|\    \ |\     \  
+" |    | \    \|    |\    \   /     /\    \   /    /|    |    |     \     \\\    \| \     \ 
+" |    |______/|    | |    | /     /  \    \ |\____\|    |    |     ,_____/|\|    \  \     |
+" |    |----'\ |    |/____/ |     |    |    || |   |/    |___ |     \--'\_|/ |     \  |    |
+" |    |_____/ |    |\    \ |     |    |    | \|___/    /    ||     /___/|   |      \ |    |
+" |    |       |    | |    ||\     \  /    /|    /     /|    ||     \____|\  |    |\ \|    |
+" |____|       |____| |____|| \_____\/____/ |   |_____|/____/||____ '     /| |____||\_____/|
+" |    |       |    | |    | \ |    ||    | /   |     |    | ||    /_____/ | |    |/ \|   ||
+" |____|       |____| |____|  \|____||____|/    |_____|____|/ |____|     | / |____|   |___|/
+"   )/           \(     )/       \(    )/         \(    )/      \( |_____|/    \(       )/  
+"   '             '     '         '    '           '    '        '    )/        '       '   
+"                                                                    '                     
 "
 " Required Items:
 " - llvm: https://llvm.org/
@@ -23,7 +30,6 @@ Plug 'vim-scripts/a.vim'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
 Plug 'Shougo/ddc-around'
@@ -44,7 +50,8 @@ Plug 'SirVer/ultisnips'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
-Plug 'mhinz/vim-startify'
+Plug 'glepnir/dashboard-nvim'
+Plug 'ntpeters/vim-better-whitespace'
 
 call plug#end()
 
@@ -115,29 +122,43 @@ require('dap').configurations.cpp = {
 
 require('nvim-dap-virtual-text').setup()
 
+vim.g.dashboard_preview_command = 'cat'
+vim.g.dashboard_preview_pipeline = ''
+vim.g.dashboard_preview_file = vim.fn.stdpath('config') .. '/header.cat'
+vim.g.dashboard_preview_file_height = 13
+vim.g.dashboard_preview_file_width = 91
+
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+	vim.g.dashboard_preview_command = 'type'
+	vim.g.dashboard_preview_file = vim.fn.stdpath('config') .. '\\header.cat'
+end
+
 EOF
 
 let g:gruvbox_italics = 1
 let g:airline_powerline_fonts = 1
 let g:UltiSnipsExpandTrigger = '<C-e>'
 let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
-let g:startify_session_persistence = 1
-let g:startify_change_to_vcs_root = 1
+let g:dashboard_default_executive = 'telescope'
+let g:dashboard_session_directory = stdpath('data') . '/session'
+let g:dashboard_custom_shortcut = { 'last_session': '', 'find_history': '', 'find_file': '', 'new_file': '', 'change_colorscheme': '', 'find_word': '', 'book_marks': '' }
+let g:better_whitespace_filetypes_blacklist = [ 'dashboard', 'vim' ]
 
 colorscheme gruvbox
 
 nnoremap <C-a> :A<CR>
 nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
-nnoremap ,s :Startify<CR>
-nnoremap ,+ :vertical resize +5<CR>
-nnoremap ,- :vertical resize -5<CR>
+nnoremap <C-+> :vertical resize +5<CR>
+nnoremap <C--> :vertical resize -5<CR>
 nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 tnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 nnoremap ,f :Telescope file_browser<CR>
+nnoremap <C-k> :Telescope find_files<CR>
+nnoremap <C-f> :Telescope treesitter<CR>
 nnoremap ,q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap ,l <Cmd>call ToggleLocationList()<CR>
-nnoremap ,Ti :TSInstall
+nnoremap ,Ti :TSInstall 
 nnoremap ,Tu :TSUpdate<CR>
 nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
 nnoremap <F6> :Mbuild<CR>
@@ -147,8 +168,6 @@ nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
 nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
 nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>
 nnoremap <F12> <Cmd>lua require('dap').step_out()<CR>
-nnoremap <C-k> <Cmd>lua require('telescope.builtin').find_files{}<CR>
-nnoremap <C-f> <Cmd>lua require('telescope.builtin').treesitter{}<CR>
 inoremap <TAB> <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <S-TAB> <Cmd>call pum#map#insert_relative(-1)<CR>
 

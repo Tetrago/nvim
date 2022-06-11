@@ -71,8 +71,6 @@ require('nvim-autopairs').setup{
 	disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" }
 }
 
-require('lspconfig').clangd.setup{}
-
 require('FTerm').setup({ border = 'rounded', dimensions = { width = 0.8, height = 0.8 }, cmd = 'powershell.exe -nologo' })
 
 require('nvim-treesitter.configs').setup{

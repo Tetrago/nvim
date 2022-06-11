@@ -51,7 +51,6 @@ Plug 'SirVer/ultisnips'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
-Plug 'Shatur/neovim-session-manager'
 Plug 'mhinz/vim-startify'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
@@ -127,21 +126,24 @@ require('dap').configurations.cpp = {
 
 require('nvim-dap-virtual-text').setup()
 
-require('session_manager').setup({
-	sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),
-	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-	autosave_only_in_session = true
-})
-
 EOF
 
+" nvim
+let g:mapleader = '<SPC>'
 let g:gruvbox_italics = 1
+
+" airline
 let g:airline_powerline_fonts = 1
+
+" UltiSnips
 let g:UltiSnipsExpandTrigger = '<C-e>'
 let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
-let g:better_whitespace_filetypes_blacklist = [ 'startify', 'vim' ]
-let g:startify_session_persistence = 1
 
+" vim-better-whitespace
+let g:better_whitespace_filetypes_blacklist = [ 'startify', 'vim' ]
+
+" vim-startify
+let g:startify_session_persistence = 1
 let g:startify_custom_header = [
 	\"       _____       _____           _____       _____              ______  _____   ______   ",
 	\"  ____|\\    \\  ___|\\    \\     ____|\\    \\     /    /|___      ___|\\     \\|\\    \\ |\\     \\  ",
@@ -159,30 +161,43 @@ let g:startify_custom_header = [
 
 colorscheme gruvbox
 
+" a.vim
 nnoremap <C-a> :A<CR>
 nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
+
+" windows
 nnoremap <C-w>= :vertical resize +5<CR>
 nnoremap <C-w>- :vertical resize -5<CR>
-nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
-tnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
-nnoremap ,f :Telescope file_browser<CR>
+nnoremap <Leader>q <Cmd>call ToggleQuickfixList()<CR>
+nnoremap <Leader>l <Cmd>call ToggleLocationList()<CR>
+
+" FTerm
+nnoremap <Leader>t <Cmd>lua require('FTerm').toggle()<CR>
+tnoremap <Leader>t <Cmd>lua require('FTerm').toggle()<CR>
+
+" Telescope
+nnoremap <Leader>f :Telescope file_browser<CR>
 nnoremap <C-p> :Telescope find_files<CR>
 nnoremap <C-f> :Telescope treesitter<CR>
-nnoremap ,q <Cmd>call ToggleQuickfixList()<CR>
-nnoremap ,l <Cmd>call ToggleLocationList()<CR>
-nnoremap ,Ti :TSInstall 
-nnoremap ,Tu :TSUpdate<CR>
-nnoremap ,d <Cmd>lua require('dap').repl.open()<CR><C-w>j
-nnoremap ,s :Startify<CR>
-nnoremap ,c :SClose<CR>
-nnoremap <F6> :Mbuild<CR>
+
+" DAP
+nnoremap <Leader>d <Cmd>lua require('dap').repl.open()<CR><C-w>j
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
 nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>
 nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
 nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
 nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>
 nnoremap <F12> <Cmd>lua require('dap').step_out()<CR>
+
+" vim-startify
+nnoremap <Leader>s :Startify<CR>
+nnoremap <Leader>c :SClose<CR>
+
+" vim-makery
+nnoremap <F6> :Mbuild<CR>
+
+" ddc
 inoremap <TAB> <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <S-TAB> <Cmd>call pum#map#insert_relative(-1)<CR>
 
@@ -198,6 +213,7 @@ set nowrap
 set spell
 set autoindent
 
+" ddc
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
 call ddc#custom#patch_global('sourceOptions', { '_': { 'matchers': ['matcher_fuzzy'], 'sorters': ['sorter_fuzzy'] },

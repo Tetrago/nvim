@@ -191,7 +191,7 @@ nnoremap <C--> :vertical resize -5<CR>
 nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 tnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 nnoremap ,f :Telescope file_browser<CR>
-nnoremap <C-k> :Telescope find_files<CR>
+nnoremap <C-p> :Telescope find_files<CR>
 nnoremap <C-f> :Telescope treesitter<CR>
 nnoremap ,q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap ,l <Cmd>call ToggleLocationList()<CR>

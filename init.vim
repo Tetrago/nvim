@@ -37,7 +37,6 @@ Plug 'Shougo/ddc-around'
 Plug 'Shougo/ddc-nvim-lsp'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/pum.vim'
-Plug 'ray-x/lsp_signature.nvim'
 Plug 'ray-x/guihua.lua', { 'do': 'cd lua/fzy && make' }
 Plug 'ray-x/navigator.lua'
 Plug 'nvim-lua/plenary.nvim'
@@ -76,12 +75,6 @@ require('nvim-autopairs').setup{
 require('lspconfig').clangd.setup{}
 
 require('FTerm').setup({ border = 'rounded', dimensions = { width = 0.8, height = 0.8 }, cmd = 'powershell.exe -nologo' })
-
-require('lsp_signature').setup({
-	bind = true,
-	handler_opts = { border = 'rounded' },
-	toggle_key = '<C-p>'
-})
 
 require('nvim-treesitter.configs').setup{
 	ensure_installed = { "c", "lua", "toml", "yaml", "cpp", "cmake", "jsdoc" },
@@ -186,8 +179,8 @@ colorscheme gruvbox
 nnoremap <C-a> :A<CR>
 nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
-nnoremap <C-+> :vertical resize +5<CR>
-nnoremap <C--> :vertical resize -5<CR>
+nnoremap <C-w>= :vertical resize +5<CR>
+nnoremap <C-w>- :vertical resize -5<CR>
 nnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 tnoremap ,t <Cmd>lua require('FTerm').toggle()<CR>
 nnoremap ,f :Telescope file_browser<CR>

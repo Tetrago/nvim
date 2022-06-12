@@ -5,13 +5,14 @@
 " /_/    \__,_/ /_/    /_.___/\____/ 
 "
 " Required Items:
-" - llvm: https://llvm.org/
 " - deno: https://deno.land/
 
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'p00f/clangd_extensions.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'numToStr/FTerm.nvim'
 Plug 'milkypostman/vim-togglelist'
@@ -25,12 +26,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'Shougo/ddc.vim'
 Plug 'vim-denops/denops.vim'
-Plug 'Shougo/ddc-around'
+Plug 'delphinus/ddc-treesitter'
 Plug 'Shougo/ddc-nvim-lsp'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/pum.vim'
-Plug 'ray-x/guihua.lua', { 'do': 'cd lua/fzy && make' }
-Plug 'ray-x/navigator.lua'
+Plug 'ray-x/lsp_signature.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -81,11 +81,23 @@ require('nvim-treesitter.configs').setup{
 
 require('spellsitter').setup()
 
-require('navigator').setup({
-	lsp_signature_help = true,
-	lsp = {
-		format_on_save = false
+require('nvim-lsp-installer').setup{
+	ensure_installed = { 'clangd' },
+	ui = { border = 'rounded' }
+}
+
+require('clangd_extensions').setup{
+	extensions = {
+		inlay_hints = { show_parameter_hints = false }
 	}
+}
+
+require('lsp_signature').setup({
+	bind = true,
+	handler_opts = {
+		border = 'rounded'
+	},
+	toggle_key = '<C-p>'
 })
 
 if vim.loop.os_uname().sysname == 'Windows_NT' then
@@ -161,6 +173,8 @@ nnoremap <C-w>= :vertical resize +5<CR>
 nnoremap <C-w>- :vertical resize -5<CR>
 nnoremap <Leader>q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap <Leader>l <Cmd>call ToggleLocationList()<CR>
+nnoremap <Leader>Q :Telescope quickfix<CR>
+nnoremap <Leader>L :Telescope loclist<CR>
 
 " FTerm
 nnoremap <Leader>t <Cmd>lua require('FTerm').toggle()<CR>
@@ -168,10 +182,21 @@ tnoremap <Leader>t <Cmd>lua require('FTerm').toggle()<CR>
 
 " Telescope
 nnoremap <Leader>f :Telescope file_browser<CR>
-nnoremap <C-p> :Telescope find_files<CR>
-nnoremap <C-f> :Telescope treesitter<CR>
+nnoremap <C-k> :Telescope find_files<CR>
+nnoremap <C-t> :Telescope treesitter<CR>
 
-" DAP
+" nvim-lsp-installer
+nnoremap <Leader>i :LspInstallInfo<CR>
+
+" lsp
+nnoremap gD <Cmd>lua vim.lsp.buf.declaration<CR>
+nnoremap gd :Telescope lsp_definitions<CR>
+nnoremap gi :Telescope lsp_implementations<CR>
+nnoremap gl <Cmd>lua vim.lsp.buf.hover<CR>
+nnoremap gr :Telescope lsp_references<CR>
+nnoremap gt :Telescope lsp_type_definitions<CR>
+
+" dap
 nnoremap <Leader>d <Cmd>lua require('dap').repl.open()<CR><C-w>j
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
 nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>
@@ -211,8 +236,8 @@ set timeoutlen=0
 
 " ddc
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
-call ddc#custom#patch_global('sources', ['nvim-lsp', 'around'])
+call ddc#custom#patch_global('sources', ['nvim-lsp', 'treesitter'])
 call ddc#custom#patch_global('sourceOptions', { '_': { 'matchers': ['matcher_fuzzy'], 'sorters': ['sorter_fuzzy'] },
-			\ 'nvim-lsp': { 'mark': 'LSP', 'forceCompletionPattern': '\.\w*|:\w*|->\w*', 'maxItems': 10 }, 'around': { 'mark': 'AROUND', 'maxItems': 5 } })
+			\ 'nvim-lsp': { 'mark': 'LSP', 'forceCompletionPattern': '\.\w*|:\w*|->\w*', 'maxItems': 10 }, 'treesitter': { 'mark': 'T', 'maxItems': 10 } })
 
 call ddc#enable()

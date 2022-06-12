@@ -52,8 +52,6 @@ call plug#end()
 
 lua << EOF
 
-local Path = require('plenary.path')
-
 require('impatient')
 
 require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
@@ -96,7 +94,7 @@ if vim.loop.os_uname().sysname == 'Windows_NT' then
 	require('dap').adapters.cppdbg = {
 		id = 'cppdbg',
 		type = 'executable',
-		command = Path:new(vim.fn.stdpath('config'), 'cpptools/debugAdapters/bin/OpenDebugAD7.exe'),
+		command = vim.fn.stdpath('config') .. '\\cpptools\\debugAdapters\\bin\\OpenDebugAD7.exe',
 		options = {
 			detached = false
 		}
@@ -189,14 +187,14 @@ nnoremap gt :Telescope lsp_type_definitions<CR>
 nnoremap gl <Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>
 
 " dap
-nnoremap <Leader>d <Cmd>lua require('dap').repl.open()<CR><C-w>w
+nnoremap <Leader>dq <Cmd>lua require('dap').repl.toggle()<CR><C-w>w
 nnoremap <F5> <Cmd>lua require('dap').continue()<CR>
 nnoremap <S-F5> <Cmd>lua require('dap').run_last()<CR>
 nnoremap <F9> <Cmd>lua require('dap').toggle_breakpoint()<CR>
 nnoremap <F10> <Cmd>lua require('dap').step_over()<CR>
 nnoremap <F11> <Cmd>lua require('dap').step_into()<CR>
 nnoremap <F12> <Cmd>lua require('dap').step_out()<CR>
-nnoremap <Leader>dt <Cmd>lua require('dap').stop()<CR>
+nnoremap <Leader>dt <Cmd>lua require('dap').terminate()<CR>
 nnoremap <Leader>dk <Cmd>lua require('dap').up()<CR>
 nnoremap <Leader>dj <Cmd>lua require('dap').down()<CR>
 nnoremap <Leader>di <Cmd>lua require('dap.ui.widgets').hover()<CR>

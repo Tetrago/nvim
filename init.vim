@@ -30,7 +30,6 @@ Plug 'delphinus/ddc-treesitter'
 Plug 'Shougo/ddc-nvim-lsp'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/pum.vim'
-Plug 'ray-x/lsp_signature.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -43,7 +42,8 @@ Plug 'SirVer/ultisnips'
 Plug 'mfussenegger/nvim-dap'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'lewis6991/spellsitter.nvim'
-Plug 'mhinz/vim-startify'
+Plug 'Shatur/neovim-session-manager'
+Plug 'goolord/alpha-nvim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
 Plug 'folke/which-key.nvim'
@@ -92,14 +92,6 @@ require('clangd_extensions').setup{
 	}
 }
 
-require('lsp_signature').setup({
-	bind = true,
-	handler_opts = {
-		border = 'rounded'
-	},
-	toggle_key = '<C-p>'
-})
-
 if vim.loop.os_uname().sysname == 'Windows_NT' then
 	require('dap').adapters.cppdbg = {
 		id = 'cppdbg',
@@ -135,12 +127,12 @@ require('which-key').setup{
 	triggers = { '<Leader>', 'g', '<C-w>' }
 }
 
-vim.g.startify_custom_header = {
-	[[ ________             ______         ]],
-	[[ ___  __/___  ___________  /_______  ]],
-	[[ __  /  _  / / /_  ___/_  __ \  __ \ ]],
-	[[ _  /   / /_/ /_  /   _  /_/ / /_/ / ]],
-	[[ /_/    \__,_/ /_/    /_.___/\____/  ]]}
+require('session_manager').setup({
+	autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
+	autosave_only_in_session = true
+})
+
+require('alpha').setup(require('dashboard').config)
 
 EOF
 
@@ -157,9 +149,6 @@ let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
 
 " vim-better-whitespace
 let g:better_whitespace_filetypes_blacklist = [ 'startify', 'vim' ]
-
-" vim-startify
-let g:startify_session_persistence = 1
 
 colorscheme gruvbox
 
@@ -189,12 +178,14 @@ nnoremap <C-t> :Telescope treesitter<CR>
 nnoremap <Leader>i :LspInstallInfo<CR>
 
 " lsp
-nnoremap gD <Cmd>lua vim.lsp.buf.declaration<CR>
+nnoremap <C-p> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <C-i> <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap gD <Cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gd :Telescope lsp_definitions<CR>
 nnoremap gi :Telescope lsp_implementations<CR>
-nnoremap gl <Cmd>lua vim.lsp.buf.hover<CR>
 nnoremap gr :Telescope lsp_references<CR>
 nnoremap gt :Telescope lsp_type_definitions<CR>
+nnoremap gl <Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>
 
 " dap
 nnoremap <Leader>d <Cmd>lua require('dap').repl.open()<CR><C-w>w
@@ -210,10 +201,10 @@ nnoremap <Leader>dj <Cmd>lua require('dap').down()<CR>
 nnoremap <Leader>di <Cmd>lua require('dap.ui.widgets').hover()<CR>
 nnoremap <Leader>ds <Cmd>lua local w = require('dap.ui.widgets'); w.centered_float(w.scopes)<CR>
 
-" vim-startify
-nnoremap <Leader>ss :SSave<CR>
-nnoremap <Leader>sl :SLoad<CR>
-nnoremap <Leader>sc :SClose<CR>
+" neovim-session-manager
+nnoremap <Leader>ss :SessionManager save_current_session<CR>
+nnoremap <Leader>sl :SessionManager load_session<CR>
+nnoremap <Leader>sd :SessionManager delete_session<CR>
 
 " vim-makery
 nnoremap <F6> :Mbuild<CR>

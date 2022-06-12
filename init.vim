@@ -179,6 +179,7 @@ nnoremap <Leader>i :LspInstallInfo<CR>
 
 " lsp
 nnoremap <C-p> <Cmd>lua vim.lsp.buf.signature_help()<CR>
+inoremap <C-p> <Cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <C-i> <Cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap gD <Cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gd :Telescope lsp_definitions<CR>

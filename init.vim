@@ -169,8 +169,8 @@ nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
 
 " windows
-nnoremap <C-w>= :vertical resize +5<CR>
-nnoremap <C-w>- :vertical resize -5<CR>
+nnoremap <C-w>. :vertical resize +5<CR>
+nnoremap <C-w>, :vertical resize -5<CR>
 nnoremap <Leader>q <Cmd>call ToggleQuickfixList()<CR>
 nnoremap <Leader>l <Cmd>call ToggleLocationList()<CR>
 nnoremap <Leader>Q :Telescope quickfix<CR>
@@ -212,7 +212,9 @@ nnoremap <Leader>ds <Cmd>lua local w = require('dap.ui.widgets'); w.centered_flo
 
 " vim-startify
 nnoremap <Leader>s :Startify<CR>
-nnoremap <Leader>c :SClose<CR>
+nnoremap <Leader>ss :SSave<CR>
+nnoremap <Leader>sl :SLoad<CR>
+nnoremap <Leader>sc :SClose<CR>
 
 " vim-makery
 nnoremap <F6> :Mbuild<CR>

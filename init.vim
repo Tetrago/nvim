@@ -148,7 +148,7 @@ let g:UltiSnipsExpandTrigger = '<C-e>'
 let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
 
 " vim-better-whitespace
-let g:better_whitespace_filetypes_blacklist = [ 'startify', 'vim' ]
+let g:better_whitespace_filetypes_blacklist = [ 'alpha', 'vim' ]
 
 colorscheme gruvbox
 

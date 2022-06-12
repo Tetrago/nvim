@@ -211,7 +211,6 @@ nnoremap <Leader>di <Cmd>lua require('dap.ui.widgets').hover()<CR>
 nnoremap <Leader>ds <Cmd>lua local w = require('dap.ui.widgets'); w.centered_float(w.scopes)<CR>
 
 " vim-startify
-nnoremap <Leader>s :Startify<CR>
 nnoremap <Leader>ss :SSave<CR>
 nnoremap <Leader>sl :SLoad<CR>
 nnoremap <Leader>sc :SClose<CR>
@@ -235,6 +234,7 @@ set nowrap
 set spell
 set autoindent
 set timeoutlen=0
+set sessionoptions=blank,curdir,winsize
 
 " ddc
 call ddc#custom#patch_global('completionMenu', 'pum.vim')

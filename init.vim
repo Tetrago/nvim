@@ -10,6 +10,7 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
+Plug 'justinmk/vim-sneak'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'p00f/clangd_extensions.nvim'
@@ -137,8 +138,10 @@ EOF
 " nvim
 let g:mapleader = ' '
 let g:gruvbox_italics = 1
+colorscheme gruvbox
 
 " airline
+let g:airline_theme = 'gruvbox'
 let g:airline_powerline_fonts = 1
 
 " UltiSnips
@@ -147,8 +150,6 @@ let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
 
 " vim-better-whitespace
 let g:better_whitespace_filetypes_blacklist = [ 'alpha', 'vim' ]
-
-colorscheme gruvbox
 
 " a.vim
 nnoremap <C-a> :A<CR>
@@ -212,13 +213,17 @@ nnoremap <F6> :Mbuild<CR>
 inoremap <TAB> <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <S-TAB> <Cmd>call pum#map#insert_relative(-1)<CR>
 
+if has('termguicolors')
+	set termguicolors
+endif
+
+set background=dark
 set number
 set relativenumber
 set tabstop=4
 set shiftwidth=4
 set mouse=a
 set autoread
-set termguicolors
 set encoding=utf8
 set nowrap
 set spell

@@ -3,9 +3,6 @@
 " __  /  _  / / /_  ___/_  __ \  __ \
 " _  /   / /_/ /_  /   _  /_/ / /_/ /
 " /_/    \__,_/ /_/    /_.___/\____/ 
-"
-" Required Items:
-" - deno: https://deno.land/
 
 call plug#begin(stdpath('data') . '/plugged')
 
@@ -25,12 +22,8 @@ Plug 'tpope/vim-projectionist'
 Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
-Plug 'Shougo/ddc.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'delphinus/ddc-treesitter'
-Plug 'Shougo/ddc-nvim-lsp'
-Plug 'tani/ddc-fuzzy'
-Plug 'Shougo/pum.vim'
+Plug 'ms-jpq/coq_nvim', { 'branch': 'coq' }
+Plug 'ms-jpq/coq.artifacts', { 'branch': 'artifacts' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
@@ -48,10 +41,27 @@ Plug 'goolord/alpha-nvim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
 Plug 'folke/which-key.nvim'
-Plug 'RRethy/vim-illuminate'
-Plug 'petertriho/nvim-scrollbar'
 
 call plug#end()
+
+" nvim
+let g:mapleader = ' '
+let g:gruvbox_italics = 1
+colorscheme gruvbox
+
+" airline
+let g:airline_theme = 'gruvbox'
+let g:airline_powerline_fonts = 1
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger = '<C-e>'
+let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
+
+" vim-better-whitespace
+let g:better_whitespace_filetypes_blacklist = [ 'alpha', 'vim' ]
+
+" coq
+let g:coq_settings = { 'auto_start': 'shut-up' }
 
 lua << EOF
 
@@ -79,20 +89,17 @@ require('nvim-treesitter.configs').setup{
 	}
 }
 
+require('coq')
+
 require('spellsitter').setup()
 
-require('scrollbar').setup()
-
 require('nvim-lsp-installer').setup{
-	ensure_installed = { 'clangd' },
+	automatic_installation = true,
 	ui = { border = 'rounded' }
 }
 
-require('lspconfig').gopls.setup{
-	on_attach = function(client)
-		require('illuminate').on_attach(client)
-	end
-}
+require('lspconfig').clangd.setup(require('coq').lsp_ensure_capabilities())
+require('lspconfig').cmake.setup(require('coq').lsp_ensure_capabilities())
 
 require('clangd_extensions').setup{
 	extensions = {
@@ -144,23 +151,7 @@ require('alpha').setup(require('dashboard').config)
 
 EOF
 
-" nvim
-let g:mapleader = ' '
-let g:gruvbox_italics = 1
-colorscheme gruvbox
-
-" airline
-let g:airline_theme = 'gruvbox'
-let g:airline_powerline_fonts = 1
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger = '<C-e>'
-let g:UltiSnipsSnippetDirectories = [ stdpath('config') . '/UltiSnips' ]
-
-" vim-better-whitespace
-let g:better_whitespace_filetypes_blacklist = [ 'alpha', 'vim' ]
-
-" a.vim
+" alternate
 nnoremap <C-a> :A<CR>
 nnoremap <C-w>A :AS<CR>
 nnoremap <C-w>a :AV<CR>
@@ -218,10 +209,6 @@ nnoremap <Leader>sd :SessionManager delete_session<CR>
 " vim-makery
 nnoremap <F6> :Mbuild<CR>
 
-" ddc
-inoremap <TAB> <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <S-TAB> <Cmd>call pum#map#insert_relative(-1)<CR>
-
 if has('termguicolors')
 	set termguicolors
 endif
@@ -239,11 +226,3 @@ set spell
 set autoindent
 set timeoutlen=0
 set sessionoptions=blank,curdir,winsize
-
-" ddc
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
-call ddc#custom#patch_global('sources', ['nvim-lsp', 'treesitter'])
-call ddc#custom#patch_global('sourceOptions', { '_': { 'matchers': ['matcher_fuzzy'], 'sorters': ['sorter_fuzzy'] },
-			\ 'nvim-lsp': { 'mark': 'LSP', 'forceCompletionPattern': '\.\w*|:\w*|->\w*', 'maxItems': 10 }, 'treesitter': { 'mark': 'T', 'maxItems': 10 } })
-
-call ddc#enable()

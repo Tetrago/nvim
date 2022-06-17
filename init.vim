@@ -100,6 +100,9 @@ require('nvim-lsp-installer').setup{
 
 require('lspconfig').clangd.setup(require('coq').lsp_ensure_capabilities())
 require('lspconfig').cmake.setup(require('coq').lsp_ensure_capabilities())
+require('lspconfig').jsonls.setup(require('coq').lsp_ensure_capabilities())
+require('lspconfig').taplo.setup(require('coq').lsp_ensure_capabilities())
+require('lspconfig').yamlls.setup(require('coq').lsp_ensure_capabilities())
 
 require('clangd_extensions').setup{
 	extensions = {

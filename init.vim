@@ -10,7 +10,7 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
-Plug 'justinmk/vim-sneak'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'p00f/clangd_extensions.nvim'
@@ -19,7 +19,6 @@ Plug 'numToStr/FTerm.nvim'
 Plug 'milkypostman/vim-togglelist'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'airblade/vim-gitgutter'
-Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-projectionist'
 Plug 'windwp/nvim-autopairs'
@@ -34,7 +33,7 @@ Plug 'Shougo/pum.vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'stevearc/dressing.nvim'
 Plug 'pianocomposer321/consolation.nvim'
 Plug 'tpope/vim-dispatch'
 Plug 'igemnace/vim-makery'
@@ -48,6 +47,8 @@ Plug 'goolord/alpha-nvim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'lewis6991/impatient.nvim'
 Plug 'folke/which-key.nvim'
+Plug 'RRethy/vim-illuminate'
+Plug 'petertriho/nvim-scrollbar'
 
 call plug#end()
 
@@ -57,7 +58,6 @@ require('impatient')
 
 require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
 require('telescope').load_extension('file_browser')
-require('telescope').load_extension('ui-select')
 
 require('nvim-autopairs').setup{
 	disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" }
@@ -80,9 +80,17 @@ require('nvim-treesitter.configs').setup{
 
 require('spellsitter').setup()
 
+require('scrollbar').setup()
+
 require('nvim-lsp-installer').setup{
 	ensure_installed = { 'clangd' },
 	ui = { border = 'rounded' }
+}
+
+require('lspconfig').gopls.setup{
+	on_attach = function(client)
+		require('illuminate').on_attach(client)
+	end
 }
 
 require('clangd_extensions').setup{

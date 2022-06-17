@@ -202,6 +202,7 @@ nnoremap <Leader>dk <Cmd>lua require('dap').up()<CR>
 nnoremap <Leader>dj <Cmd>lua require('dap').down()<CR>
 nnoremap <Leader>di <Cmd>lua require('dap.ui.widgets').hover()<CR>
 nnoremap <Leader>ds <Cmd>lua local w = require('dap.ui.widgets'); w.centered_float(w.scopes)<CR>
+nnoremap <Leader>dq <Cmd>lua require('dap').repl.toggle()<CR>
 
 " neovim-session-manager
 nnoremap <Leader>ss :SessionManager save_current_session<CR>

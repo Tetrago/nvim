@@ -11,6 +11,7 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'morhetz/gruvbox'
 Plug 'ggandor/lightspeed.nvim'
+Plug 'rcarriga/nvim-notify'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'p00f/clangd_extensions.nvim'

@@ -87,6 +87,7 @@ return require('packer').startup({function(use)
 	    indent = { enable = false }
 	}
     end}
+    use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
     -- Completion
     use { 'ms-jpq/coq_nvim', branch = 'coq', requires = { 'kyazdani42/nvim-web-devicons' }, config = function() require('coq') end }

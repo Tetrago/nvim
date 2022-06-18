@@ -45,6 +45,12 @@ return require('packer').startup({function(use)
 	vim.g.better_whitespace_filetypes_blacklist = { 'alpha' }
     end}
     use 'tpope/vim-surround'
+    use { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = function()
+	require('indent_blankline').setup{
+	    show_current_context = true,
+	    show_current_context_start = true
+	}
+    end}
 
     -- Workflow
     use { 'Shatur/neovim-session-manager', config = function()

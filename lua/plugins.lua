@@ -66,13 +66,13 @@ return require('packer').startup({function(use)
     use 'tpope/vim-sleuth'
 
     -- LSP
-    use { 'williamboman/nvim-lsp-installer', config = function()
+    use {'williamboman/nvim-lsp-installer', config = function()
 	require('nvim-lsp-installer').setup{
 	    automatic_installation = true,
 	    ui = { border = 'rounded' }
 	}
     end}
-    use { 'neovim/nvim-lspconfig', config = function()
+    use { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer', config = function()
 	require('lspconfig').clangd.setup(require('coq').lsp_ensure_capabilities())
 	require('lspconfig').cmake.setup(require('coq').lsp_ensure_capabilities())
 	require('lspconfig').jsonls.setup(require('coq').lsp_ensure_capabilities())

@@ -9,9 +9,9 @@ return require('packer').startup({function(use)
     use { 'lewis6991/impatient.nvim', config = function() require('impatient') end }
 
     -- Interface
-    use { 'morhetz/gruvbox', config = function()
-	vim.g.gruvbox_italics = 1
-	vim.cmd [[colorscheme gruvbox]]
+    use { 'sainnhe/gruvbox-material', config = function()
+	vim.g.gruvbox_material_enable_italic = 1
+	vim.cmd [[colorscheme gruvbox-material]]
     end}
     use { 'windwp/windline.nvim', config = function()
 	require('wlsample.airline')

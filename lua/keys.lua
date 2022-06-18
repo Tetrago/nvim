@@ -14,10 +14,7 @@ nmap('<C-w>a', ':AV<CR>')
 -- windows
 nmap('<C-w>.', ':vertical resize +10<CR>')
 nmap('<C-w>,', ':vertical resize -10<CR>')
-nmap('<Leader>q', ':call ToggleQuickfixList()<CR>')
-nmap('<Leader>l', ':call ToggleLocationList()<CR>')
-nmap('<Leader>Q', ':Telescope quickfix<CR>')
-nmap('<Leader>L', ':Telescope loclist<CR>')
+nmap('<Leader>q', ':TroubleToggle<CR>')
 
 -- telescope
 nmap('<Leader>f', ':Telescope file_browser<CR>')

@@ -29,10 +29,10 @@ return require('packer').startup({function(use)
 	}
 	require('keys')
     end}
+    use { 'folke/trouble.nvim', config = function() require('trouble') end }
 
     -- Quality of life
     use 'ggandor/lightspeed.nvim'
-    use 'milkypostman/vim-togglelist'
     use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end }
     use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
     use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
@@ -51,6 +51,7 @@ return require('packer').startup({function(use)
 	    show_current_context_start = true
 	}
     end}
+    use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
 
     -- Workflow
     use { 'Shatur/neovim-session-manager', config = function()
@@ -59,8 +60,8 @@ return require('packer').startup({function(use)
 	    autosave_only_in_session = true
 	})
     end}
-    use { 'tpope/vim-projectionist', opt = true, cmd = { 'SessionManager' } }
-    use { 'tpope/vim-dispatch', opt = true, cmd = { 'Make' } }
+    use 'tpope/vim-projectionist'
+    use 'tpope/vim-dispatch'
     use 'igemnace/vim-makery'
     use 'tpope/vim-sleuth'
 

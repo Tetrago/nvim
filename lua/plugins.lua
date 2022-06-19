@@ -28,7 +28,7 @@ return require('packer').startup({function(use)
 	}
 	require('keys')
     end}
-    use { 'folke/trouble.nvim', config = function() require('trouble') end }
+    use { 'folke/trouble.nvim', config = function() require('trouble').setup{} end }
 
     -- Quality of life
     use 'ggandor/lightspeed.nvim'

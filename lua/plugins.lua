@@ -59,7 +59,7 @@ return require('packer').startup({function(use)
     use 'tpope/vim-sleuth'
 
     -- LSP
-    use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', config = function()
+    use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', after = 'coq_nvim', config = function()
 	require('nvim-lsp-installer').setup{
 	    ensure_installed = { 'clangd', 'cmake' },
 	    ui = { border = 'rounded' }
@@ -68,7 +68,7 @@ return require('packer').startup({function(use)
 	local lsp = require('lspconfig')
 	local coq = require('coq')
 
-	for server in require('nvim-lsp-installer').get_installed_servers() do
+	for _, server in ipairs(require('nvim-lsp-installer').get_installed_servers()) do
 	    lsp[server.name].setup(coq.lsp_ensure_capabilities())
 	end
     end}

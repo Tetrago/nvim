@@ -35,10 +35,6 @@ return require('packer').startup({function(use)
     use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end }
     use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
     use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
-    use { 'SirVer/ultisnips', opts = true, keys = { '<C-e>' }, setup = function()
-	vim.g.UltiSnipsExpandTrigger = '<C-e>'
-	vim.g.UltiSnipsSnippetDirectories = { vim.fn.stdpath('config') .. '/UltiSnips' }
-    end}
     use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
     use { 'ntpeters/vim-better-whitespace', config = function()
 	vim.g.better_whitespace_filetypes_blacklist = { 'alpha' }
@@ -53,7 +49,7 @@ return require('packer').startup({function(use)
     use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
 
     -- Workflow
-    use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', requires = { 'nvim-telescope/telescope.nvim' }, config = function()
+    use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', config = function()
 	require('project_nvim').setup{}
 	require('telescope').load_extension('projects')
     end}
@@ -87,7 +83,7 @@ return require('packer').startup({function(use)
 
     -- Completion
     use { 'ms-jpq/coq_nvim', branch = 'coq', requires = { 'kyazdani42/nvim-web-devicons' }, config = function() require('coq') end }
-    use { 'ms-jpq/coq.artifacts', branch = 'artifacts' }
+    use { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }
 
     -- Debug
     use { 'mfussenegger/nvim-dap', config = function()

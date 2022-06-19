@@ -82,7 +82,11 @@ return require('packer').startup({function(use)
     use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
     -- Completion
-    use { 'ms-jpq/coq_nvim', branch = 'coq', requires = { 'kyazdani42/nvim-web-devicons' }, config = function() require('coq') end }
+    use { 'ms-jpq/coq_nvim', branch = 'coq', requires = { 'kyazdani42/nvim-web-devicons' }, config = function()
+	vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\' }
+
+	require('coq')
+    end}
     use { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }
 
     -- Debug

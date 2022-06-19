@@ -8,8 +8,6 @@ if vim.fn.has('termguicolors') then
 	vim.opt.termguicolors = true
 end
 
-vim.g.coq_settings = { auto_start = 'shut-up' }
-
 require('plugins')
 
 vim.g.mapleader = ' '

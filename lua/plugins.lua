@@ -61,15 +61,16 @@ return require('packer').startup({function(use)
     -- LSP
     use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', config = function()
 	require('nvim-lsp-installer').setup{
-	    automatic_installation = true,
+	    ensure_installed = { 'clangd', 'cmake' },
 	    ui = { border = 'rounded' }
 	}
 
-	require('lspconfig').clangd.setup(require('coq').lsp_ensure_capabilities())
-	require('lspconfig').cmake.setup(require('coq').lsp_ensure_capabilities())
-	require('lspconfig').jsonls.setup(require('coq').lsp_ensure_capabilities())
-	require('lspconfig').yamlls.setup(require('coq').lsp_ensure_capabilities())
-	require('lspconfig').sumneko_lua.setup(require('coq').lsp_ensure_capabilities())
+	local lsp = require('lspconfig')
+	local coq = require('coq')
+
+	for server in require('nvim-lsp-installer').get_installed_servers() do
+	    lsp[server.name].setup(coq.lsp_ensure_capabilities())
+	end
     end}
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
 	require('nvim-treesitter.configs').setup{

@@ -19,9 +19,8 @@ return require('packer').startup({function(use)
     use 'mhinz/vim-signify'
     use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function()
 	require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
-	require('telescope').load_extension('file_browser')
     end}
-    use { 'nvim-telescope/telescope-file-browser.nvim' }
+    use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim', config = function() require('telescope').load_extension('file_browser') end }
     use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = function() require('alpha').setup(require('dashboard').config) end }
     use { 'folke/which-key.nvim', config = function()
 	require('which-key').setup{
@@ -66,13 +65,12 @@ return require('packer').startup({function(use)
     use 'tpope/vim-sleuth'
 
     -- LSP
-    use {'williamboman/nvim-lsp-installer', config = function()
+    use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', config = function()
 	require('nvim-lsp-installer').setup{
 	    automatic_installation = true,
 	    ui = { border = 'rounded' }
 	}
-    end}
-    use { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer', config = function()
+
 	require('lspconfig').clangd.setup(require('coq').lsp_ensure_capabilities())
 	require('lspconfig').cmake.setup(require('coq').lsp_ensure_capabilities())
 	require('lspconfig').jsonls.setup(require('coq').lsp_ensure_capabilities())

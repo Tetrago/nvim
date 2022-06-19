@@ -25,5 +25,4 @@ vim.opt.wrap = false
 vim.opt.spell = true
 vim.opt.autoindent = true
 vim.opt.timeoutlen = 0
-vim.opt.sessionoptions = { 'blank', 'curdir', 'winsize' }
 vim.opt.list = true

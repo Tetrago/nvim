@@ -22,8 +22,8 @@ nmap('<C-k>', ':Telescope find_files<CR>')
 nmap('<C-t>', ':Telescope treesitter<CR>')
 
 -- installers
-nmap('<Leader>i', ':LspInstallInfo<CR>')
-nmap('<Leader>p', ':PackerSync<CR>')
+nmap('<Leader>il', ':LspInstallInfo<CR>')
+nmap('<Leader>ip', ':PackerSync<CR>')
 
 -- lsp
 nmap('<C-p>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
@@ -39,7 +39,6 @@ nmap('gl', '<Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>')
 -- dap
 nmap('<Leader>dq', '<Cmd>lua require("dap").repl.toggle()<CR><C-w>w')
 nmap('<F5>', '<Cmd>lua require("dap").continue()<CR>')
-nmap('<S-F5>', '<Cmd>lua require("dap").run_last()<CR>')
 nmap('<F9>', '<Cmd>lua require("dap").toggle_breakpoint()<CR>')
 nmap('<F10>', '<Cmd>lua require("dap").step_over()<CR>')
 nmap('<F11>', '<Cmd>lua require("dap").step_into()<CR>')
@@ -51,10 +50,8 @@ nmap('<Leader>di', '<Cmd>lua require("dap.ui.widgets").hover()<CR>')
 nmap('<Leader>ds', '<Cmd>lua local w = require("dap.ui.widgets"); w.centered_float(w.scopes)<CR>')
 nmap('<Leader>dq', '<Cmd>lua require("dap").repl.toggle()<CR>')
 
--- sessions
-nmap('<Leader>ss', ':SessionManager save_current_session<CR>')
-nmap('<Leader>sl', ':SessionManager load_session<CR>')
-nmap('<Leader>sd', ':SessionManager delete_session<CR>')
+-- projects
+nmap('<Leader>p', ':Telescope projects<CR>')
 
 -- makery
 nmap('<F6>', ':Mbuild<CR>')

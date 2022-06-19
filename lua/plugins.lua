@@ -53,11 +53,9 @@ return require('packer').startup({function(use)
     use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
 
     -- Workflow
-    use { 'Shatur/neovim-session-manager', config = function()
-	require('session_manager').setup({
-	    autoload_mode = require('session_manager.config').AutoloadMode.Disabled,
-	    autosave_only_in_session = true
-	})
+    use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', requires = { 'nvim-telescope/telescope.nvim' }, config = function()
+	require('project_nvim').setup{}
+	require('telescope').load_extension('projects')
     end}
     use 'tpope/vim-projectionist'
     use 'tpope/vim-dispatch'

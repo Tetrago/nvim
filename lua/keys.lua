@@ -1,57 +1,52 @@
-function nmap(key, command)
-    vim.api.nvim_set_keymap('n', key, command, { noremap = true, silent = true })
-end
+require('which-key').register({
+    ['<C-a>'] = { '<Cmd>A<CR>', 'Alternate' },
+    ['<C-k>'] = { '<Cmd>Telescope find_files<CR>', 'Find files' },
+    ['<C-t>'] = { '<Cmd>Telescope treesitter<CR>', 'Find tokens' },
+    ['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
+    ['<C-h>'] = { '<Cmd>WhichKey<CR>', 'List keys' },
+    ['<F6>'] = { '<Cmd>Mbuild<CR>', 'Build' },
+    ['<F5>'] = { '<Cmd>lua require("dap").continue()<CR>', 'Run/continue' },
+    ['<F9>'] = { '<Cmd>lua require("dap").toggle_breakpoint()<CR>', 'Toggle breakpoint' },
+    ['<F10>'] = { '<Cmd>lua require("dap").step_over()<CR>', 'Step over' },
+    ['<F11>'] = { '<Cmd>lua require("dap").step_over()<CR>', 'Step into' },
+    ['<F12>'] = { '<Cmd>lua require("dap").step_over()<CR>', 'Step out' }
+})
 
-function imap(key, command)
-    vim.api.nvim_set_keymap('i', key, command, { noremap = true, silent = true })
-end
+require('which-key').register({
+    ['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
+}, { mode = 'i' })
 
--- alternate
-nmap('<C-a>', ':A<CR>')
-nmap('<C-w>A', ':AS<CR>')
-nmap('<C-w>a', ':AV<CR>')
+require('which-key').register({
+    q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
+    f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
+    p = { '<Cmd>Telescope projects<CR>', 'Projects' },
+    i = {
+        name = '+install',
+        l = { '<Cmd>LspInstallInfo<CR>', 'Language servers' },
+        p = { '<Cmd>PackerSync<CR>', 'Plugins' }
+    },
+    d = {
+        name = '+debug',
+        t = { '<Cmd>lua require("dap").terminate()<CR>', 'Terminate' },
+        i = { '<Cmd>lua require("dap.ui.widgets").hover()<CR>', 'Inspect' },
+        s = { '<Cmd>lua local w = require("dap.ui.widgets"); w.centered_float(w.scopes)<CR>', 'Scope' },
+        q = { '<Cmd>lua require("dap").repl.toggle()<CR>)', 'Repl' }
+    },
+    s = 'which_key_ignore'
+}, { prefix = '<Leader>' })
 
--- windows
-nmap('<C-w>.', ':vertical resize +10<CR>')
-nmap('<C-w>,', ':vertical resize -10<CR>')
-nmap('<Leader>q', ':TroubleToggle<CR>')
+require('which-key').register({
+    A = { '<Cmd>AS<CR>', 'Alternate split horizontal' },
+    a = { '<Cmd>AV<CR>', 'Alternate split vertical' },
+    ['.'] = { '<Cmd>vertical resize +10<CR>', 'Increase vertical size' },
+    [','] = { '<Cmd>vertical resize -10<CR>', 'Decrease vertical size' }
+}, { prefix = '<C-w>' })
 
--- telescope
-nmap('<Leader>f', ':Telescope file_browser<CR>')
-nmap('<C-k>', ':Telescope find_files<CR>')
-nmap('<C-t>', ':Telescope treesitter<CR>')
-
--- installers
-nmap('<Leader>il', ':LspInstallInfo<CR>')
-nmap('<Leader>ip', ':PackerSync<CR>')
-
--- lsp
-nmap('<C-p>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
-imap('<C-p>', '<Cmd>lua vim.lsp.buf.signature_help()<CR>')
-nmap('<C-i>', '<Cmd>lua vim.lsp.buf.hover()<CR>')
-nmap('gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>')
-nmap('gd', ':Telescope lsp_definitions<CR>')
-nmap('gi', ':Telescope lsp_implementations<CR>')
-nmap('gr', ':Telescope lsp_references<CR>')
-nmap('gt', ':Telescope lsp_type_definitions<CR>')
-nmap('gl', '<Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>')
-
--- dap
-nmap('<Leader>dq', '<Cmd>lua require("dap").repl.toggle()<CR><C-w>w')
-nmap('<F5>', '<Cmd>lua require("dap").continue()<CR>')
-nmap('<F9>', '<Cmd>lua require("dap").toggle_breakpoint()<CR>')
-nmap('<F10>', '<Cmd>lua require("dap").step_over()<CR>')
-nmap('<F11>', '<Cmd>lua require("dap").step_into()<CR>')
-nmap('<F12>', '<Cmd>lua require("dap").step_out()<CR>')
-nmap('<Leader>dt', '<Cmd>lua require("dap").terminate()<CR>')
-nmap('<Leader>dk', '<Cmd>lua require("dap").up()<CR>')
-nmap('<Leader>dj', '<Cmd>lua require("dap").down()<CR>')
-nmap('<Leader>di', '<Cmd>lua require("dap.ui.widgets").hover()<CR>')
-nmap('<Leader>ds', '<Cmd>lua local w = require("dap.ui.widgets"); w.centered_float(w.scopes)<CR>')
-nmap('<Leader>dq', '<Cmd>lua require("dap").repl.toggle()<CR>')
-
--- projects
-nmap('<Leader>p', ':Telescope projects<CR>')
-
--- makery
-nmap('<F6>', ':Mbuild<CR>')
+require('which-key').register({
+    D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
+    d = { '<Cmd>Telescope lsp_definitions<CR>', 'Definitions' },
+    i = { '<Cmd>Telescope lsp_implementations<CR>', 'Implementations' },
+    r = { '<Cmd>Telescope lsp_references<CR>', 'References' },
+    t = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Types' },
+    l = { '<Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>', 'Line diagnostics' }
+}, { prefix = 'g' })

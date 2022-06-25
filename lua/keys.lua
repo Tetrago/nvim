@@ -29,7 +29,7 @@ require('which-key').register({
 		name = '+install',
 		l = { '<Cmd>LspInstallInfo<CR>', 'Modify language servers' },
 		p = { '<Cmd>PackerSync<CR>', 'Sync plugins' },
-		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' }
+		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' },
 		v = { '<Cmd>Telescope packer<CR>', 'View plugins' }
 	},
 	d = {

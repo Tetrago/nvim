@@ -17,11 +17,11 @@ return require('packer').startup({function(use)
 		require('wlsample.airline')
 	end}
 	use 'mhinz/vim-signify'
-	use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function()
+	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
 		require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
 	end}
 	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim', config = function() require('telescope').load_extension('file_browser') end }
-	use { 'goolord/alpha-nvim', requires = { 'kyazdani42/nvim-web-devicons' }, config = function() require('alpha').setup(require('dashboard').config) end }
+	use { 'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = function() require('alpha').setup(require('dashboard').config) end }
 	use { 'folke/which-key.nvim', config = function()
 		require('which-key').setup{
 			triggers = { '<Leader>', 'g', '<C-w>' }
@@ -50,6 +50,7 @@ return require('packer').startup({function(use)
 		}
 	end}
 	use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+	use 'RRethy/vim-illuminate'
 
 	-- Workflow
 	use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', config = function()
@@ -59,20 +60,17 @@ return require('packer').startup({function(use)
 	use 'tpope/vim-projectionist'
 	use 'tpope/vim-dispatch'
 	use 'igemnace/vim-makery'
-	use 'tpope/vim-commentary'
+	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 
 	-- LSP
-	use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', after = 'coq_nvim', config = function()
+	use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', after = { 'coq_nvim', 'vim-illuminate' }, config = function()
 		require('nvim-lsp-installer').setup{
 			ensure_installed = { 'clangd', 'cmake' },
 			ui = { border = 'rounded' }
 		}
 
-		local lsp = require('lspconfig')
-		local coq = require('coq')
-
 		for _, server in ipairs(require('nvim-lsp-installer').get_installed_servers()) do
-			lsp[server.name].setup(coq.lsp_ensure_capabilities())
+			require('lspconfig')[server.name].setup(require('coq').lsp_ensure_capabilities({ on_attach = function(client) require('illuminate').on_attach(client) end }))
 		end
 	end}
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
@@ -86,7 +84,7 @@ return require('packer').startup({function(use)
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
 	-- Completion
-	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = { 'kyazdani42/nvim-web-devicons' }, config = function()
+	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', config = function()
 		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\\' }
 
 		require('coq')

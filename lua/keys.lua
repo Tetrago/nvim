@@ -24,17 +24,13 @@ require('which-key').register({
 	t = { '<Cmd>CHADopen<CR>', 'Tree' },
 	v = {
 		name = '+view',
-		p = { '<Cmd>Telescope packer<CR>', 'Plugins' }
 	},
 	i = {
 		name = '+install',
-		l = { '<Cmd>LspInstallInfo<CR>', 'Language servers' },
-		d = { ':VimspectorInstall ', 'Debug adapter' }
-	},
-	u = {
-		name = '+update',
-		p = { '<Cmd>PackerSync<CR>', 'Plugins' },
-		d = { '<Cmd>VimspectorUpdate<CR>', 'Debug adapters' }
+		l = { '<Cmd>LspInstallInfo<CR>', 'Modify language servers' },
+		p = { '<Cmd>PackerSync<CR>', 'Sync plugins' },
+		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' }
+		v = { '<Cmd>Telescope packer<CR>', 'View plugins' }
 	},
 	d = {
 		name = '+debug',

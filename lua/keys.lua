@@ -21,6 +21,7 @@ require('which-key').register({
 	q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
+	t = { '<Cmd>CHADopen<CR>', 'Tree' },
 	i = {
 		name = '+install',
 		l = { '<Cmd>LspInstallInfo<CR>', 'Language servers' },

@@ -21,7 +21,6 @@ vim.opt.mouse = 'a'
 vim.opt.autoread = true
 vim.opt.encoding = 'utf8'
 vim.opt.wrap = false
-vim.opt.spell = true
 vim.opt.autoindent = true
 vim.opt.timeoutlen = 0
 vim.opt.list = true

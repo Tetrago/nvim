@@ -30,13 +30,15 @@ return require('packer').startup({function(use)
 	end}
 	use { 'folke/trouble.nvim', config = function() require('trouble').setup{} end }
 	use { 'declancm/cinnamon.nvim', config = function() require('cinnamon').setup() end }
+	use { 'ms-jpq/chadtree', branch = 'chad', run = 'python -m chadtree deps', setup = function()
+		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
+	end}
 
 	-- Quality of life
 	use 'ggandor/lightspeed.nvim'
 	use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end }
 	use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
 	use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
-	use { 'lewis6991/spellsitter.nvim', config = function() require('spellsitter').setup() end }
 	use { 'ntpeters/vim-better-whitespace', config = function()
 		vim.g.better_whitespace_filetypes_blacklist = { 'alpha' }
 	end}

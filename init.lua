@@ -8,7 +8,6 @@ local vim = vim
 local g = vim.g
 local wo = vim.wo
 local opt = vim.opt
-local api = vim.api
 
 require('plugins')
 
@@ -36,3 +35,8 @@ opt.foldexpr = 'nvim_treesitter#foldexpr()'
 if vim.fn.has('termguicolors') then
 	opt.termguicolors = true
 end
+
+vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticSignError', numhl = 'DiagnosticSignError' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
+vim.fn.sign_define('DiagnosticSignHint', { text = ' ', texthl = 'DiagnosticSignHint', numhl = 'DiagnosticSignHint' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })

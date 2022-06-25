@@ -24,3 +24,5 @@ vim.opt.wrap = false
 vim.opt.autoindent = true
 vim.opt.timeoutlen = 0
 vim.opt.list = true
+vim.opt.showmode = false
+vim.wo.fillchars = 'eob: '

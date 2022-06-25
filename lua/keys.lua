@@ -3,7 +3,6 @@ require('which-key').register({
 	['<C-k>'] = { '<Cmd>Telescope find_files<CR>', 'Find files' },
 	['<C-t>'] = { '<Cmd>Telescope treesitter<CR>', 'Find tokens' },
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
-	['<C-h>'] = { '<Cmd>WhichKey<CR>', 'List keys' },
 	['<F6>'] = { '<Cmd>Mbuild<CR>', 'Build' },
 	['<F5>'] = { '<Plug>VimspectorContinue', 'Continue' },
 	['<S-F5>'] = { '<Plug>VimspectorStop', 'Stop' },
@@ -18,22 +17,31 @@ require('which-key').register({
 }, { mode = 'i' })
 
 require('which-key').register({
+	['?'] = { '<Cmd>Cheatsheet<CR>', 'Help' },
 	q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
 	t = { '<Cmd>CHADopen<CR>', 'Tree' },
+	v = {
+		name = '+view',
+		p = { '<Cmd>Telescope packer<CR>', 'Plugins' }
+	},
 	i = {
 		name = '+install',
 		l = { '<Cmd>LspInstallInfo<CR>', 'Language servers' },
+		d = { ':VimspectorInstall ', 'Debug adapter' }
+	},
+	u = {
+		name = '+update',
 		p = { '<Cmd>PackerSync<CR>', 'Plugins' },
-		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' }
+		d = { '<Cmd>VimspectorUpdate<CR>', 'Debug adapters' }
 	},
 	d = {
 		name = '+debug',
 		u = { '<Plug>VimspectorUpFrame', 'Move up a frame' },
 		d = { '<Plug>VimspectorDownFrame', 'Move down a frame' },
 		i = { '<Plug>VimspectorBalloonEval', 'Inspect' },
-		l = { '<Cmd>call vimspector#Launch()<CR>', 'Launch' },
+		l = { '<Cmd>Telescope vimspector configurations<CR>', 'Launch' },
 		q = { '<Cmd>VimspectorReset<CR>', 'Close debugger' }
 	},
 	c = {

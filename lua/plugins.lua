@@ -20,7 +20,11 @@ return require('packer').startup({function(use)
 	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
 		require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
 	end}
+	use { 'nvim-telescope/telescope-fzf-native.nvim', after = 'telescope.nvim', run = 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build', config = function() require('telescope').load_extension('fzf') end }
 	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim', config = function() require('telescope').load_extension('file_browser') end }
+	use { 'nvim-telescope/telescope-vimspector.nvim', after = { 'telescope.nvim', 'vimspector' }, config = function() require('telescope').load_extension('vimspector') end }
+	use { 'nvim-telescope/telescope-packer.nvim', after = 'telescope.nvim', config = function() require('telescope').load_extension('packer') end }
+	use { 'sudormrfbin/cheatsheet.nvim', after = 'telescope.nvim', requires = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim' } }
 	use { 'goolord/alpha-nvim', requires = 'kyazdani42/nvim-web-devicons', config = function() require('alpha').setup(require('dashboard').config) end }
 	use { 'folke/which-key.nvim', config = function()
 		require('which-key').setup{
@@ -51,7 +55,11 @@ return require('packer').startup({function(use)
 	end}
 	use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
 	use { 'mcauley-penney/tidy.nvim', config = function() require('tidy').setup() end }
-	use { 'gbprod/cutlass.nvim', config = function() require('cutlass').setup({}) end }
+	use { 'gbprod/cutlass.nvim', config = function()
+		require('cutlass').setup({
+			cut_key = 'd'
+		})
+	end}
 	use { 'sQVe/sort.nvim', config = function() require('sort').setup({}) end }
 	use { 'booperlv/nvim-gomove', config = function()
 		require('gomove').setup{

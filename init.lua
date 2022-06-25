@@ -4,25 +4,35 @@
 -- _  /   / /_/ /_  /   _  /_/ / /_/ /
 -- /_/    \__,_/ /_/    /_.___/\____/
 
-if vim.fn.has('termguicolors') then
-	vim.opt.termguicolors = true
-end
+local vim = vim
+local g = vim.g
+local wo = vim.wo
+local opt = vim.opt
+local api = vim.api
 
 require('plugins')
 
-vim.g.mapleader = ' '
-vim.opt.background = 'dark'
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = false
-vim.opt.mouse = 'a'
-vim.opt.autoread = true
-vim.opt.encoding = 'utf8'
-vim.opt.wrap = false
-vim.opt.autoindent = true
-vim.opt.timeoutlen = 0
-vim.opt.list = true
-vim.opt.showmode = false
-vim.wo.fillchars = 'eob: '
+g.mapleader = ' '
+wo.fillchars = 'eob: '
+
+opt.background = 'dark'
+opt.number = true
+opt.relativenumber = true
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = false
+opt.mouse = 'a'
+opt.autoread = true
+opt.encoding = 'utf8'
+opt.wrap = false
+opt.autoindent = true
+opt.timeoutlen = 0
+opt.list = true
+opt.showmode = false
+opt.foldlevel = 99
+opt.foldmethod = 'expr'
+opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+if vim.fn.has('termguicolors') then
+	opt.termguicolors = true
+end

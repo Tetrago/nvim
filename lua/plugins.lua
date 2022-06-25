@@ -33,15 +33,15 @@ return require('packer').startup({function(use)
 	use { 'ms-jpq/chadtree', branch = 'chad', run = 'python -m chadtree deps', setup = function()
 		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
 	end}
+	use 'kevinhwang91/nvim-hlslens'
+	use { 'nacro90/numb.nvim', config = function() require('numb').setup() end }
+	use 'RRethy/vim-illuminate'
+	use 'ggandor/lightspeed.nvim'
 
 	-- Quality of life
-	use 'ggandor/lightspeed.nvim'
 	use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end }
 	use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
 	use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
-	use { 'ntpeters/vim-better-whitespace', config = function()
-		vim.g.better_whitespace_filetypes_blacklist = { 'alpha' }
-	end}
 	use 'tpope/vim-surround'
 	use { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = function()
 		require('indent_blankline').setup{
@@ -50,7 +50,16 @@ return require('packer').startup({function(use)
 		}
 	end}
 	use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
-	use 'RRethy/vim-illuminate'
+	use { 'mcauley-penney/tidy.nvim', config = function() require('tidy').setup() end }
+	use { 'gbprod/cutlass.nvim', config = function() require('cutlass').setup({}) end }
+	use { 'sQVe/sort.nvim', config = function() require('sort').setup({}) end }
+	use { 'booperlv/nvim-gomove', config = function()
+		require('gomove').setup{
+			map_defaults = true,
+			reindent = true,
+			undojoin = true
+		}
+	end}
 
 	-- Workflow
 	use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', config = function()

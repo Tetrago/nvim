@@ -19,7 +19,7 @@ require('which-key').register({
 }, { mode = 'i' })
 
 require('which-key').register({
-	['?'] = { '<Cmd>Cheatsheet<CR>', 'Help' },
+	['?'] = 'Help',
 	q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
@@ -59,10 +59,14 @@ require('which-key').register({
 }, { prefix = '<C-w>' })
 
 require('which-key').register({
-	D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
-	d = { '<Cmd>Telescope lsp_definitions<CR>', 'Definitions' },
-	i = { '<Cmd>Telescope lsp_implementations<CR>', 'Implementations' },
-	r = { '<Cmd>Telescope lsp_references<CR>', 'References' },
-	t = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Types' },
-	l = { '<Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>', 'Line diagnostics' }
+	t = {
+		name = '+to',
+		D = { '<Cmd>lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
+		d = { '<Cmd>Telescope lsp_definitions<CR>', 'Definitions' },
+		i = { '<Cmd>Telescope lsp_implementations<CR>', 'Implementations' },
+		r = { '<Cmd>Telescope lsp_references<CR>', 'References' },
+		t = { '<Cmd>Telescope lsp_type_definitions<CR>', 'Types' },
+		l = { '<Cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>', 'Line diagnostics' },
+	},
+	rr = 'Refactor'
 }, { prefix = 'g' })

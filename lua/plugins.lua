@@ -43,7 +43,35 @@ return require('packer').startup({function(use)
 	use 'ggandor/lightspeed.nvim'
 
 	-- Quality of life
-	use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup{} end }
+	use { 'windwp/nvim-autopairs', config = function()
+		local npairs = require('nvim-autopairs')
+
+		npairs.setup({ map_bs = false, map_cr = false })
+
+		_G.MUtils = {}
+
+		MUtils.CR = function()
+			if vim.fn.pumvisible() ~= 0 then
+				if vim.fn.complete_info({ 'selected' }).selected ~= -1 then
+					return npairs.esc('<C-y>')
+				else
+					return npairs.esc('<C-e>') .. npairs.autopairs_cr()
+				end
+			else
+				return npairs.autopairs_cr()
+			end
+		end
+		vim.api.nvim_set_keymap('i', '<Cr>', 'v:lua.MUtils.CR()', { expr = true, noremap = true })
+
+		MUtils.BS = function()
+			if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info({ 'mode' }).mode == 'eval' then
+				return npairs.esc('<C-e>') .. npairs.autopairs_bs()
+			else
+				return npairs.autopairs_bs()
+			end
+		end
+		vim.api.nvim_set_keymap('i', '<BS>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
+	end}
 	use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
 	use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
 	use 'tpope/vim-surround'
@@ -101,10 +129,15 @@ return require('packer').startup({function(use)
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
 	-- Completion
-	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', config = function()
-		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\\' }
-
+	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', setup = function()
+		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\\', ['keymap.recommended'] = false }
+	end, config = function()
 		require('coq')
+
+		vim.api.nvim_set_keymap('i', '<ESC>', [[pumvisible() ? '<C-e><ESC>' : '<ESC>']], { expr = true, noremap = true })
+		vim.api.nvim_set_keymap('i', '<C-c>', [[pumvisible() ? '<C-e><C-c>' : '<C-c>']], { expr = true, noremap = true })
+		vim.api.nvim_set_keymap('i', '<TAB>', [[pumvisible() ? '<C-n>' : '<TAB>']], { expr = true, noremap = true })
+		vim.api.nvim_set_keymap('i', '<S-TAB>', [[pumvisible() ? '<C-p>' : '<BS>']], { expr = true, noremap = true })
 	end}
 	use { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }
 

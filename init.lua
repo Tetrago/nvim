@@ -4,7 +4,6 @@
 -- _  /   / /_/ /_  /   _  /_/ / /_/ /
 -- /_/    \__,_/ /_/    /_.___/\____/
 
-local vim = vim
 local g = vim.g
 local wo = vim.wo
 local opt = vim.opt
@@ -31,6 +30,7 @@ opt.showmode = false
 opt.foldlevel = 99
 opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.signcolumn = 'yes:1'
 
 if vim.fn.has('termguicolors') then
 	opt.termguicolors = true

@@ -10,11 +10,19 @@ return require('packer').startup({function(use)
 
 	-- Interface
 	use { 'sainnhe/gruvbox-material', config = function()
+		vim.opt.background = 'dark'
+
 		vim.g.gruvbox_material_enable_italic = 1
+		vim.g.gruvbox_material_enable_bold = 1
+
 		vim.cmd [[colorscheme gruvbox-material]]
 	end}
-	use { 'windwp/windline.nvim', config = function()
-		require('wlsample.airline')
+	use { 'nvim-lualine/lualine.nvim', after = 'gruvbox-material', config = function()
+		require('lualine').setup{
+			options = {
+				theme = 'gruvbox-material'
+			}
+		}
 	end}
 	use 'mhinz/vim-signify'
 	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()

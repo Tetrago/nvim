@@ -13,7 +13,6 @@ require('plugins')
 g.mapleader = ' '
 wo.fillchars = 'eob: '
 
-opt.background = 'dark'
 opt.number = true
 opt.relativenumber = true
 opt.tabstop = 4

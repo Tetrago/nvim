@@ -3,7 +3,7 @@ require('which-key').register({
 	['<C-k>'] = { '<Cmd>Telescope find_files<CR>', 'Find files' },
 	['<C-t>'] = { '<Cmd>Telescope treesitter<CR>', 'Find tokens' },
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
-	['<C-i>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' },
+	['<C-S-p>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' },
 	['<F6>'] = { '<Cmd>Mbuild<CR>', 'Build' },
 	['<F5>'] = { '<Plug>VimspectorContinue', 'Continue' },
 	['<S-F5>'] = { '<Plug>VimspectorStop', 'Stop' },
@@ -15,7 +15,7 @@ require('which-key').register({
 
 require('which-key').register({
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
-	['<C-i>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' }
+	['<C-S-p>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' }
 }, { mode = 'i' })
 
 require('which-key').register({

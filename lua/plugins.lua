@@ -47,8 +47,8 @@ return require('packer').startup({function(use)
 	end}
 	use 'kevinhwang91/nvim-hlslens'
 	use { 'nacro90/numb.nvim', config = function() require('numb').setup() end }
-	use 'RRethy/vim-illuminate'
 	use 'ggandor/lightspeed.nvim'
+	use 'RRethy/vim-illuminate'
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()
@@ -126,17 +126,28 @@ return require('packer').startup({function(use)
 			require('lspconfig')[server.name].setup(require('coq').lsp_ensure_capabilities({ on_attach = function(client) require('illuminate').on_attach(client) end }))
 		end
 	end}
+
+	-- treesitter
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()
 		require('nvim-treesitter.configs').setup{
 			ensure_installed = { 'c', 'cpp', 'cmake', 'lua', 'toml', 'yaml', 'json', 'jsdoc' },
 			highlight = { enable = true },
 			incremental_selection = { enable = true },
-			indent = { enable = false }
+			indent = { enable = false },
+			refactor = {
+				smart_rename = {
+					enable = true,
+					keymaps = {
+						smart_rename = 'grr'
+					}
+				}
+			}
 		}
 	end}
+	use 'nvim-treesitter/nvim-treesitter-refactor'
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
-	-- Completion
+	-- coq
 	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', setup = function()
 		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\\', ['keymap.recommended'] = false }
 	end, config = function()
@@ -149,7 +160,7 @@ return require('packer').startup({function(use)
 	end}
 	use { 'ms-jpq/coq.artifacts', branch = 'artifacts', after = 'coq_nvim' }
 
-	-- Debug
+	-- vimspector
 	use 'puremourning/vimspector'
 
 	if packer_bootstrap then

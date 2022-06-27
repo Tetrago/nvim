@@ -94,7 +94,8 @@ return require('packer').startup({function(use)
 	use { 'mcauley-penney/tidy.nvim', config = function() require('tidy').setup() end }
 	use { 'gbprod/cutlass.nvim', config = function()
 		require('cutlass').setup({
-			cut_key = 'd'
+			cut_key = 'd',
+			exclude = { 'ns', 'nS' }
 		})
 	end}
 	use { 'sQVe/sort.nvim', config = function() require('sort').setup({}) end }

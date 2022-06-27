@@ -17,7 +17,7 @@ return require('packer').startup({function(use)
 
 		vim.cmd [[colorscheme gruvbox-material]]
 	end}
-	use { 'nvim-lualine/lualine.nvim', after = 'gruvbox-material', config = function()
+	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', after = 'gruvbox-material', config = function()
 		require('lualine').setup{
 			options = {
 				theme = 'gruvbox-material'
@@ -50,6 +50,7 @@ return require('packer').startup({function(use)
 	use 'ggandor/lightspeed.nvim'
 	use 'RRethy/vim-illuminate'
 	use 'folke/lsp-colors.nvim'
+	use 'tpope/vim-fugitive'
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

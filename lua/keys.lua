@@ -22,11 +22,19 @@ require('which-key').register({
 	['?'] = 'Help',
 	q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
-	r = { '<Cmd>Telescope registers<CR>', 'View registers' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
-	t = { '<Cmd>CHADopen<CR>', 'Tree' },
+	g = {
+		name = '+project',
+		c = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
+		b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
+		s = { '<Cmd>Telescope git_status<CR>', 'Status' }
+	},
+	t = { '<Cmd>HADopen<CR>', 'Tree' },
 	v = {
 		name = '+view',
+		r = { '<Cmd>Telescope registers<CR>', 'Registers' },
+		c = { '<Cmd>Telescope commands<CR>', 'Commands' },
+		f = { '<Cmd>Telescope filetypes<CR>', 'Filetypes' }
 	},
 	i = {
 		name = '+install',

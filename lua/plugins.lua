@@ -9,7 +9,7 @@ return require('packer').startup({function(use)
 	use { 'lewis6991/impatient.nvim', config = function() require('impatient') end }
 
 	-- Interface
-	use { 'sainnhe/gruvbox-material', config = function()
+	use { 'sainnhe/gruvbox-material', after = 'lsp-colors.nvim', config = function()
 		vim.opt.background = 'dark'
 
 		vim.g.gruvbox_material_enable_italic = 1
@@ -49,6 +49,7 @@ return require('packer').startup({function(use)
 	use { 'nacro90/numb.nvim', config = function() require('numb').setup() end }
 	use 'ggandor/lightspeed.nvim'
 	use 'RRethy/vim-illuminate'
+	use 'folke/lsp-colors.nvim'
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

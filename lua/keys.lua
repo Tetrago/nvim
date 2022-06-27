@@ -24,7 +24,7 @@ require('which-key').register({
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
 	g = {
-		name = '+project',
+		name = '+git',
 		c = { '<Cmd>Telescope git_commits<CR>', 'Commits' },
 		b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
 		s = { '<Cmd>Telescope git_status<CR>', 'Status' }

@@ -29,7 +29,7 @@ require('which-key').register({
 		b = { '<Cmd>Telescope git_branches<CR>', 'Branches' },
 		s = { '<Cmd>Telescope git_status<CR>', 'Status' }
 	},
-	t = { '<Cmd>HADopen<CR>', 'Tree' },
+	t = { '<Cmd>CHADopen<CR>', 'Tree' },
 	v = {
 		name = '+view',
 		r = { '<Cmd>Telescope registers<CR>', 'Registers' },

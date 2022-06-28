@@ -152,7 +152,7 @@ return require('packer').startup({function(use)
 
 	-- coq
 	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', setup = function()
-		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '\\', ['keymap.recommended'] = false }
+		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '<C-\\>', ['keymap.recommended'] = false }
 	end, config = function()
 		require('coq')
 

@@ -51,6 +51,18 @@ return require('packer').startup({function(use)
 	use 'RRethy/vim-illuminate'
 	use 'folke/lsp-colors.nvim'
 	use 'tpope/vim-fugitive'
+	use { 'gelguy/wilder.nvim', requires = { 'romgrk/fzy-lua-native', 'kyazdani42/nvim-web-devicons' }, config = function()
+		local wilder = require('wilder')
+
+		wilder.setup({ modes = { ':', '/', '?' } })
+		wilder.set_option('renderer', wilder.popupmenu_renderer({
+			highlighter = { wilder.lua_fzy_highlighter() },
+			left = { ' ', wilder.popupmenu_devicons() },
+			highlights = {
+				accent = wilder.make_hl('WilderAccent', 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = '#844643' } })
+			}
+		}))
+	end}
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

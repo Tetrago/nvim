@@ -94,6 +94,7 @@ return require('packer').startup({function(use)
 		end
 		vim.api.nvim_set_keymap('i', '<BS>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
 	end}
+	use { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter', config = function() require('nvim-ts-autotag').setup() end }
 	use { 'stevearc/dressing.nvim', after = 'telescope.nvim' }
 	use { 'godlygeek/tabular', opt = true, cmd = { 'Tabularize', 'Tab' } }
 	use 'tpope/vim-surround'

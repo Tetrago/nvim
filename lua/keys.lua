@@ -38,10 +38,11 @@ require('which-key').register({
 	},
 	i = {
 		name = '+install',
-		l = { '<Cmd>LspInstallInfo<CR>', 'Modify language servers' },
-		p = { '<Cmd>PackerSync<CR>', 'Sync plugins' },
+		l = { '<Cmd>LspInstallInfo<CR>', 'Install linter' },
+		p = { '<Cmd>PackerSync<CR>', 'Update plugins' },
 		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' },
-		v = { '<Cmd>Telescope packer<CR>', 'View plugins' }
+		v = { '<Cmd>Telescope packer<CR>', 'View plugins' },
+		s = { require('pickers').install_syntax, 'Install language syntax' }
 	},
 	d = {
 		name = '+debug',

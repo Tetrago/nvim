@@ -41,7 +41,6 @@ return require('packer').startup({function(use)
 		require('keys')
 	end}
 	use { 'folke/trouble.nvim', config = function() require('trouble').setup{} end }
-	use { 'karb94/neoscroll.nvim', config = function() require('neoscroll').setup() end }
 	use { 'ms-jpq/chadtree', branch = 'chad', run = 'python -m chadtree deps', setup = function()
 		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
 	end}

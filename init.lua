@@ -30,6 +30,7 @@ opt.foldlevel = 99
 opt.foldmethod = 'expr'
 opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.signcolumn = 'yes:1'
+opt.guifont = 'JetBrainsMono NF:h10'
 
 if vim.fn.has('termguicolors') then
 	opt.termguicolors = true
@@ -39,5 +40,3 @@ vim.fn.sign_define('DiagnosticSignError', { text = ' ', texthl = 'DiagnosticS
 vim.fn.sign_define('DiagnosticSignWarn', { text = ' ', texthl = 'DiagnosticSignWarn', numhl = 'DiagnosticSignWarn' })
 vim.fn.sign_define('DiagnosticSignHint', { text = ' ', texthl = 'DiagnosticSignHint', numhl = 'DiagnosticSignHint' })
 vim.fn.sign_define('DiagnosticSignInfo', { text = ' ', texthl = 'DiagnosticSignInfo', numhl = 'DiagnosticSignInfo' })
-
-vim.cmd [[set guifont=JetBrainsMono\ NF:h10]]

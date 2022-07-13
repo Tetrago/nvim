@@ -9,14 +9,7 @@ return require('packer').startup({function(use)
 	use { 'lewis6991/impatient.nvim', config = function() require('impatient') end }
 
 	-- Interface
-	use { 'sainnhe/gruvbox-material', after = 'lsp-colors.nvim', config = function()
-		vim.opt.background = 'dark'
-
-		vim.g.gruvbox_material_enable_italic = 1
-		vim.g.gruvbox_material_enable_bold = 1
-
-		vim.cmd [[colorscheme gruvbox-material]]
-	end}
+	require('user').theme(use)
 	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', after = 'gruvbox-material', config = function()
 		require('lualine').setup{
 			options = {

@@ -10,12 +10,23 @@ require('which-key').register({
 	['<F9>'] = { '<Plug>VimspectorToggleBreakpoint', 'Toggle breakpoint' },
 	['<F10>'] = { '<Plug>VimspectorStepOver', 'Step over' },
 	['<F11>'] = { '<Plug>VimspectorStepInto', 'Step into' },
-	['<F12>'] = { '<Plug>VimspectorStepOut', 'Step out' }
+	['<F12>'] = { '<Plug>VimspectorStepOut', 'Step out' },
+	['<C-i>'] = { function()
+		local filetype = vim.bo.filetype
+		if vim.tbl_contains({ 'vim', 'help' }, filetype) then
+			vim.cmd('h ' .. vim.fn.expand('<cword>'))
+		elseif vim.tbl_contains({ 'man' }, filetype) then
+			vim.cmd('Man ' .. vim.fn.expand('<cword>'))
+		elseif vim.fn.expand('%:t') == 'Cargo.toml' then
+			require('crates').show_popup()
+		else
+			vim.lsp.buf.hover()
+		end
+	end, 'Inspect' }
 })
 
 require('which-key').register({
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
-	['<C-S-p>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' }
 }, { mode = 'i' })
 
 require('which-key').register({
@@ -81,3 +92,5 @@ require('which-key').register({
 	},
 	rr = 'Refactor'
 }, { prefix = 'g' })
+
+require('config').keys(require('which-key').register)

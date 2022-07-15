@@ -7,13 +7,13 @@ end
 return require('packer').startup({function(use)
 	use 'wbthomason/packer.nvim'
 	use { 'lewis6991/impatient.nvim', config = function() require('impatient') end }
+	use 'nathom/filetype.nvim'
 
 	-- Interface
 	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', after = 'gruvbox-material', config = function()
 		require('lualine').setup{
-			options = {
-				theme = 'gruvbox-material'
-			}
+			options = require('config').statusline(),
+			extensions = { 'chadtree', 'quickfix', 'fugitive' }
 		}
 	end}
 	use 'mhinz/vim-signify'
@@ -130,7 +130,9 @@ return require('packer').startup({function(use)
 		}
 
 		for _, server in ipairs(require('nvim-lsp-installer').get_installed_servers()) do
-			require('lspconfig')[server.name].setup(require('coq').lsp_ensure_capabilities({ on_attach = function(client) require('illuminate').on_attach(client) end }))
+			require('lspconfig')[server.name].setup(require('coq').lsp_ensure_capabilities({ on_attach = function(client, bufnr)
+				require('illuminate').on_attach(client)
+			end}))
 		end
 	end}
 
@@ -151,7 +153,12 @@ return require('packer').startup({function(use)
 			}
 		}
 	end}
-	use 'nvim-treesitter/nvim-treesitter-refactor'
+	use { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' }
+	use { 'nvim-treesitter/nvim-treesitter-context', after = 'nvim-treesitter', config = function()
+		require('treesitter-context').setup{
+			enable = true
+		}
+	end}
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
 	-- coq
@@ -169,6 +176,18 @@ return require('packer').startup({function(use)
 
 	-- vimspector
 	use 'puremourning/vimspector'
+
+	-- Language Specific
+	use { 'Saecki/crates.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
+		require('crates').setup{
+			src = {
+				coq = {
+					enabled = true,
+					name = "crates.nvim"
+				}
+			}
+		}
+	end, opt = true, event = "BufRead Cargo.toml" }
 
 	require('config').plugins(use)
 

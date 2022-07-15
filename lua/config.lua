@@ -14,4 +14,13 @@ M.plugins = function(use)
 	end}
 end
 
+M.keys = function(register)
+end
+
+M.statusline = function()
+	return {
+		theme = 'gruvbox-material',
+	}
+end
+
 return M

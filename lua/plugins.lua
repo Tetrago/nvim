@@ -9,7 +9,6 @@ return require('packer').startup({function(use)
 	use { 'lewis6991/impatient.nvim', config = function() require('impatient') end }
 
 	-- Interface
-	require('user').theme(use)
 	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', after = 'gruvbox-material', config = function()
 		require('lualine').setup{
 			options = {
@@ -170,6 +169,8 @@ return require('packer').startup({function(use)
 
 	-- vimspector
 	use 'puremourning/vimspector'
+
+	require('config').plugins(use)
 
 	if packer_bootstrap then
 		require('packer').sync()

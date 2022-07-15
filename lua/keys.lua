@@ -57,7 +57,7 @@ require('which-key').register({
 		i = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/init.lua<CR>', 'Open init.lua' },
 		p = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/plugins.lua<CR>', 'Open plugins.lua' },
 		k = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/keys.lua<CR>', 'Open keys.lua' },
-		u = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/user.lua<CR>', 'Open user.lua' }
+		c = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/config.lua<CR>', 'Open config.lua' }
 	},
 	s = 'which_key_ignore'
 }, { prefix = '<Leader>' })

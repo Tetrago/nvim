@@ -22,8 +22,13 @@ require('which-key').register({
 		else
 			vim.lsp.buf.hover()
 		end
-	end, 'Inspect' }
+	end, 'Inspect' },
+	['<C-x>'] = { '<Cmd>ToggleTerm float<CR>i', 'Toggle terminal' }
 })
+
+require('which-key').register({
+	['<C-x>'] = { '<Cmd>ToggleTerm float<CR>', 'Toggle terminal' }
+}, { mode = 't' })
 
 require('which-key').register({
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },

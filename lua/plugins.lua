@@ -54,6 +54,15 @@ return require('packer').startup({function(use)
 			}
 		}))
 	end}
+	use { 'akinsho/toggleterm.nvim', tag = "v2.*", config = function()
+		require('toggleterm').setup{
+			direction = 'float',
+			start_in_insert = false,
+			float_opts = {
+				border = 'rounded'
+			}
+		}
+	end}
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

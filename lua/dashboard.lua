@@ -65,8 +65,9 @@ local buttons = {
 	type = "group",
 	val = {
 		button("e", "  New file", "<cmd>ene <CR>"),
-		button("SPC i  ", "  Install languages"),
-		button("SPC s l", "  Load session"),
+		button("SPC i", "  Install languages"),
+		button("SPC p", "  Load project"),
+		button("SPC c", "  Load config"),
 	},
 	opts = {
 		spacing = 1,

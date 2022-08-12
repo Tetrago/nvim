@@ -18,7 +18,7 @@ return require('packer').startup({function(use)
 	end}
 	use 'mhinz/vim-signify'
 	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
-		require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external" } } }
+		require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external", "venv" } } }
 	end}
 	use { 'nvim-telescope/telescope-fzf-native.nvim', after = 'telescope.nvim', run = 'cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build', config = function() require('telescope').load_extension('fzf') end }
 	use { 'nvim-telescope/telescope-file-browser.nvim', after = 'telescope.nvim', config = function() require('telescope').load_extension('file_browser') end }

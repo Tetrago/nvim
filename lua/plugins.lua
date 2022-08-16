@@ -10,7 +10,7 @@ return require('packer').startup({function(use)
 	use 'nathom/filetype.nvim'
 
 	-- Interface
-	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', after = 'gruvbox-material', config = function()
+	use { 'nvim-lualine/lualine.nvim', requires = 'kyazdani42/nvim-web-devicons', config = function()
 		require('lualine').setup{
 			options = require('config').statusline(),
 			extensions = { 'chadtree', 'quickfix', 'fugitive' }

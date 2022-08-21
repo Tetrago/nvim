@@ -5,7 +5,7 @@ M.init = function()
 end
 
 M.plugins = function(use)
-	use { 'sainnhe/gruvbox-material', after = 'lsp-colors.nvim', config = function()
+	use { 'sainnhe/gruvbox-material', after = { 'lsp-colors.nvim', 'lualine.nvim' }, config = function()
 		vim.opt.background = 'dark'
 
 		vim.g.gruvbox_material_enable_bold = 1
@@ -19,7 +19,7 @@ end
 
 M.statusline = function()
 	return {
-		theme = 'gruvbox-material',
+		theme = 'auto',
 	}
 end
 

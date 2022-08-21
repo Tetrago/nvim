@@ -63,6 +63,7 @@ return require('packer').startup({function(use)
 			}
 		}
 	end}
+	use { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

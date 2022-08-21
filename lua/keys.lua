@@ -75,6 +75,11 @@ require('which-key').register({
 		k = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/keys.lua<CR>', 'Open keys.lua' },
 		c = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/config.lua<CR>', 'Open config.lua' }
 	},
+	m = {
+		name = 'Preview',
+		m = { '<Cmd>MarkdownPreview<CR>', 'Markdown preview' },
+		M = { '<Cmd>MarkdownPreviewStop<CR>', 'Stop markdown preview' }
+	},
 	s = 'which_key_ignore'
 }, { prefix = '<Leader>' })
 

@@ -76,7 +76,7 @@ require('which-key').register({
 		c = { '<Cmd>e ' .. vim.fn.stdpath('config') .. '/lua/config.lua<CR>', 'Open config.lua' }
 	},
 	m = {
-		name = 'Preview',
+		name = '+preview',
 		m = { '<Cmd>MarkdownPreview<CR>', 'Markdown preview' },
 		M = { '<Cmd>MarkdownPreviewStop<CR>', 'Stop markdown preview' }
 	},

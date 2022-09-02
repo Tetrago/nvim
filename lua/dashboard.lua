@@ -65,9 +65,10 @@ local buttons = {
 	type = "group",
 	val = {
 		button("e", "  New file", "<cmd>ene <CR>"),
-		button("SPC i", "  Install languages"),
-		button("SPC p", "  Load project"),
-		button("SPC c", "  Load config"),
+		button("SPC p", "  Open project"),
+		button("SPC i", "  Install components"),
+		button("SPC c", "  Configuration"),
+		button("SPC i p", "  Update plugins"),
 	},
 	opts = {
 		spacing = 1,

@@ -50,14 +50,14 @@ require('which-key').register({
 		name = '+view',
 		r = { '<Cmd>Telescope registers<CR>', 'Registers' },
 		c = { '<Cmd>Telescope commands<CR>', 'Commands' },
-		f = { '<Cmd>Telescope filetypes<CR>', 'Filetypes' }
+		f = { '<Cmd>Telescope filetypes<CR>', 'Filetypes' },
+		v = { '<Cmd>Telescope packer<CR>', 'Plugins' }
 	},
 	i = {
 		name = '+install',
 		l = { '<Cmd>LspInstallInfo<CR>', 'Install linter' },
 		p = { '<Cmd>PackerSync<CR>', 'Update plugins' },
 		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' },
-		v = { '<Cmd>Telescope packer<CR>', 'View plugins' },
 		s = { require('pickers').install_syntax, 'Install language syntax' }
 	},
 	d = {

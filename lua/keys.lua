@@ -78,7 +78,8 @@ require('which-key').register({
 	m = {
 		name = '+preview',
 		m = { '<Cmd>MarkdownPreview<CR>', 'Markdown preview' },
-		M = { '<Cmd>MarkdownPreviewStop<CR>', 'Stop markdown preview' }
+		M = { '<Cmd>MarkdownPreviewStop<CR>', 'Stop markdown preview' },
+		x = { '<Cmd>%!xxd<CR>', 'Hex' }
 	},
 	s = 'which_key_ignore'
 }, { prefix = '<Leader>' })

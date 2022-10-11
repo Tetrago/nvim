@@ -1,0 +1,11 @@
+{
+	"*": {
+		"type": "script",
+		"makery": {
+			"build": { "makeprg": "cmake --build build" },
+			"generate": { "makeprg": "cmake -B build -S . -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=C:/Opt/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G \"MinGW Makefiles\"" }
+		}
+	},
+	"src/*.cpp": { "alternate": "src/{}.h" },
+	"src/*.h": { "alternate": "src/{}.cpp" }
+}

@@ -58,7 +58,8 @@ require('which-key').register({
 		l = { '<Cmd>LspInstallInfo<CR>', 'Install linter' },
 		p = { '<Cmd>PackerSync<CR>', 'Update plugins' },
 		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' },
-		s = { require('pickers').install_syntax, 'Install language syntax' }
+		s = { require('pickers').install_syntax, 'Install language syntax' },
+		t = { require('pickers').template, 'Template' }
 	},
 	d = {
 		name = '+debug',

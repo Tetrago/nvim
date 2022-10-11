@@ -1,0 +1,17 @@
+{
+	"configurations": {
+		"Launch": {
+			"adapter": "debugpy",
+			"configuration": {
+				"type": "python",
+				"request": "launch",
+				"cwd": "${workspaceRoot}",
+				"python": "${workspaceRoot}/venv/Scripts/python.exe",
+				"stopOnEntry": false,
+				"console": "externalTerminal",
+				"debugOptions": [],
+				"program": "main.py"
+			}
+		}
+	}
+}

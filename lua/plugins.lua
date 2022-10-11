@@ -33,7 +33,7 @@ return require('packer').startup({function(use)
 		require('keys')
 	end}
 	use { 'folke/trouble.nvim', config = function() require('trouble').setup{} end }
-	use { 'ms-jpq/chadtree', branch = 'chad', run = 'python -m chadtree deps', setup = function()
+	use { 'ms-jpq/chadtree', branch = 'chad', commit = 'ee1d3be2e9d7a0885f3e27168583a52cbaae53bf', run = 'python -m chadtree deps', setup = function()
 		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
 	end}
 	use 'kevinhwang91/nvim-hlslens'
@@ -64,6 +64,7 @@ return require('packer').startup({function(use)
 		}
 	end}
 	use { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
+	use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()
@@ -131,6 +132,7 @@ return require('packer').startup({function(use)
 	use 'tpope/vim-dispatch'
 	use 'igemnace/vim-makery'
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
+	use { 'tibabit/vim-templates', setup = function() vim.g.tmpl_search_paths = vim.fn.stdpath('config') .. '/templates' end }
 
 	-- LSP
 	use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', after = { 'coq_nvim', 'vim-illuminate' }, config = function()
@@ -172,7 +174,7 @@ return require('packer').startup({function(use)
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
 	-- coq
-	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', setup = function()
+	use { 'ms-jpq/coq_nvim', branch = 'coq', commit = '84ec5faf2aaf49819e626f64dd94f4e71cf575bc', requires = 'kyazdani42/nvim-web-devicons', setup = function()
 		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '<C-\\>', ['keymap.recommended'] = false }
 	end, config = function()
 		require('coq')

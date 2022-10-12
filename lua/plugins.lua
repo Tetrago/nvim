@@ -132,7 +132,6 @@ return require('packer').startup({function(use)
 	use 'tpope/vim-dispatch'
 	use 'igemnace/vim-makery'
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
-	use { 'tibabit/vim-templates', setup = function() vim.g.tmpl_search_paths = vim.fn.stdpath('config') .. '/templates' end }
 
 	-- LSP
 	use {'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig', after = { 'coq_nvim', 'vim-illuminate' }, config = function()

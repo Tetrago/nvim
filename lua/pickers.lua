@@ -7,7 +7,9 @@ local conf = require('telescope.config').values
 local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 
+
 local M = {}
+M.templates_dir = vim.fn.stdpath('config') .. '/templates'
 
 M.install_syntax = function(opts)
 	opts = opts or {}
@@ -30,11 +32,10 @@ M.install_syntax = function(opts)
 end
 
 function find_templates()
-	local template_dir = vim.fn.stdpath('config') .. '/templates'
-	local files = scan.scan_dir(template_dir, { hidden = false })
+	local files = scan.scan_dir(M.templates_dir, { hidden = false })
 
 	for i, v in ipairs(files) do
-		files[i] = Path:new(v):make_relative(template_dir):gsub('.template', '')
+		files[i] = Path:new(v):make_relative(M.templates_dir)
 	end
 
 	return files
@@ -52,7 +53,7 @@ M.template = function(opts)
 				actions.close(prompt_bufnr)
 				local selection = action_state.get_selected_entry()
 
-				vim.cmd('TemplateInit ' .. selection[1])
+				vim.cmd('read ' .. M.templates_dir .. '/' .. selection[1])
 			end)
 
 			return true

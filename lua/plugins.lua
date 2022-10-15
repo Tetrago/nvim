@@ -64,6 +64,7 @@ return require('packer').startup({function(use)
 	end}
 	use { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
 	use { 'lewis6991/gitsigns.nvim', after = 'trouble.nvim', config = function() require('gitsigns').setup() end }
+	use 'camspiers/animate.vim'
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

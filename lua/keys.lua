@@ -3,7 +3,6 @@ require('which-key').register({
 	['<C-k>'] = { '<Cmd>Telescope find_files<CR>', 'Find files' },
 	['<C-t>'] = { '<Cmd>Telescope treesitter<CR>', 'Find tokens' },
 	['<C-p>'] = { '<Cmd>lua vim.lsp.buf.signature_help()<CR>', 'List parameters' },
-	['<C-S-p>'] = { '<Cmd>lua vim.lsp.buf.hover()<CR>', 'Lsp info' },
 	['<F6>'] = { '<Cmd>Mbuild<CR>', 'Build' },
 	['<F5>'] = { '<Plug>VimspectorContinue', 'Continue' },
 	['<S-F5>'] = { '<Plug>VimspectorStop', 'Stop' },
@@ -106,3 +105,8 @@ require('which-key').register({
 }, { prefix = 'g' })
 
 require('config').keys(require('which-key').register)
+
+vim.api.nvim_set_keymap('n', '<C-Down>', '<Cmd>call animate#window_delta_height(10)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Up>', '<Cmd>call animate#window_delta_height(-10)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Right>', '<Cmd>call animate#window_delta_width(10)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-Left>', '<Cmd>call animate#window_delta_width(-10)<CR>', { noremap = true, silent = true })

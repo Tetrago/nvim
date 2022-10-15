@@ -16,7 +16,6 @@ return require('packer').startup({function(use)
 			extensions = { 'chadtree', 'quickfix', 'fugitive' }
 		}
 	end}
-	use 'mhinz/vim-signify'
 	use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', config = function()
 		require('telescope').setup{ defaults = { file_ignore_patterns = { ".cache", "build", ".git", ".vs", "external", "venv" } } }
 	end}
@@ -64,7 +63,7 @@ return require('packer').startup({function(use)
 		}
 	end}
 	use { 'iamcco/markdown-preview.nvim', run = function() vim.fn['mkdp#util#install']() end }
-	use { 'lewis6991/gitsigns.nvim', config = function() require('gitsigns').setup() end }
+	use { 'lewis6991/gitsigns.nvim', after = 'trouble.nvim', config = function() require('gitsigns').setup() end }
 
 	-- Quality of life
 	use { 'windwp/nvim-autopairs', config = function()

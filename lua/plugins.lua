@@ -146,6 +146,7 @@ return require('packer').startup({function(use)
 			end}))
 		end
 	end}
+	use 'gpanders/editorconfig.nvim'
 
 	-- treesitter
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function()

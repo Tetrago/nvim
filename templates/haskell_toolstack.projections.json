@@ -1,0 +1,8 @@
+{
+	"*": {
+		"type": "script",
+		"makery": {
+			"build": { "makeprg": "stack build" }
+		}
+	}
+}

@@ -35,7 +35,24 @@ return require('packer').startup({function(use)
 	use { 'ms-jpq/chadtree', branch = 'chad', commit = 'ee1d3be2e9d7a0885f3e27168583a52cbaae53bf', run = 'python -m chadtree deps', setup = function()
 		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
 	end}
-	use 'kevinhwang91/nvim-hlslens'
+	use { 'kevinhwang91/nvim-hlslens', config = function()
+		require('hlslens').setup()
+
+		local kopts = {noremap = true, silent = true}
+
+		vim.api.nvim_set_keymap('n', 'n',
+		    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+		    kopts)
+		vim.api.nvim_set_keymap('n', 'N',
+		    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+		    kopts)
+		vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+		vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+		vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+		vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+		vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+	end}
 	use { 'nacro90/numb.nvim', config = function() require('numb').setup() end }
 	use 'ggandor/lightspeed.nvim'
 	use 'RRethy/vim-illuminate'

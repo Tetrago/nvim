@@ -22,7 +22,9 @@ require('which-key').register({
 			vim.lsp.buf.hover()
 		end
 	end, 'Inspect' },
-	['<C-x>'] = { '<Cmd>ToggleTerm float<CR>i', 'Toggle terminal' }
+	['<C-x>'] = { '<Cmd>ToggleTerm float<CR>i', 'Toggle terminal' },
+	['<C-Space>'] = { '<Cmd>cclose<CR>', 'Close quickfix window' },
+	['<C-c>'] = { '<Cmd>Dispatch<CR>', 'Dispatch' }
 })
 
 require('which-key').register({
@@ -35,7 +37,7 @@ require('which-key').register({
 
 require('which-key').register({
 	['?'] = 'Help',
-	q = { '<Cmd>TroubleToggle<CR>', 'Toggle quickfix' },
+	q = { '<Cmd>TroubleToggle<CR>', 'Show trouble' },
 	f = { '<Cmd>Telescope file_browser<CR>', 'Browse files' },
 	p = { '<Cmd>Telescope projects<CR>', 'Projects' },
 	g = {
@@ -81,7 +83,8 @@ require('which-key').register({
 		M = { '<Cmd>MarkdownPreviewStop<CR>', 'Stop markdown preview' },
 		x = { '<Cmd>%!xxd<CR>', 'Hex' }
 	},
-	s = 'which_key_ignore'
+	s = 'which_key_ignore',
+	l = 'which_key_ignore'
 }, { prefix = '<Leader>' })
 
 require('which-key').register({

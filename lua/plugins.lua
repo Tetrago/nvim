@@ -150,7 +150,6 @@ return require('packer').startup({function(use)
 	end}
 	use 'tpope/vim-projectionist'
 	use 'tpope/vim-dispatch'
-	use 'igemnace/vim-makery'
 	use { 'numToStr/Comment.nvim', config = function() require('Comment').setup() end }
 
 	-- LSP

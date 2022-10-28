@@ -142,7 +142,10 @@ return require('packer').startup({function(use)
 
 	-- Workflow
 	use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', config = function()
-		require('project_nvim').setup{}
+		require('project_nvim').setup{
+			patterns = { ".git", "Makefile", "build", "CMakeLists.txt", ".gitignore" }
+		}
+
 		require('telescope').load_extension('projects')
 	end}
 	use 'tpope/vim-projectionist'

@@ -23,7 +23,7 @@ require('which-key').register({
 		end
 	end, 'Inspect' },
 	['<C-x>'] = { '<Cmd>ToggleTerm float<CR>i', 'Toggle terminal' },
-	['<C-Space>'] = { '<Cmd>cclose<CR>', 'Close quickfix window' },
+	['<C-q>'] = { '<Cmd>cclose<CR>', 'Close quickfix window' },
 	['<C-c>'] = { '<Cmd>Dispatch<CR>', 'Dispatch' }
 })
 

@@ -26,6 +26,8 @@ vim.opt.foldlevel = 99
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.signcolumn = 'yes:1'
+vim.opt.backup = false
+vim.opt.writebackup = false
 
 if vim.fn.has('termguicolors') then
 	vim.opt.termguicolors = true

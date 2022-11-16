@@ -143,7 +143,7 @@ return require('packer').startup({function(use)
 	-- Workflow
 	use { 'ahmedkhalf/project.nvim', after = 'telescope.nvim', config = function()
 		require('project_nvim').setup{
-			patterns = { ".git", "Makefile", "build", "CMakeLists.txt", ".gitignore" }
+			patterns = { ".git", "Makefile", "build", "CMakeLists.txt", ".gitignore", "venv" }
 		}
 
 		require('telescope').load_extension('projects')

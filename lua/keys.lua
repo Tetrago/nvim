@@ -56,7 +56,7 @@ require('which-key').register({
 	},
 	i = {
 		name = '+install',
-		l = { '<Cmd>LspInstallInfo<CR>', 'Install linter' },
+		l = { '<Cmd>LspInstallInfo<CR>', 'Install language server' },
 		p = { '<Cmd>PackerSync<CR>', 'Update plugins' },
 		d = { '<Cmd>VimspectorUpdate<CR>', 'Update debug adapters' },
 		s = { require('pickers').install_syntax, 'Install language syntax' },

@@ -32,7 +32,7 @@ return require('packer').startup({function(use)
 		require('keys')
 	end}
 	use { 'folke/trouble.nvim', config = function() require('trouble').setup{} end }
-	use { 'ms-jpq/chadtree', branch = 'chad', commit = 'ee1d3be2e9d7a0885f3e27168583a52cbaae53bf', run = 'python -m chadtree deps', setup = function()
+	use { 'ms-jpq/chadtree', branch = 'chad', run = 'python -m chadtree deps', setup = function()
 		vim.g.chadtree_settings = { ["theme.text_colour_set"] = 'nerdtree_syntax_dark' }
 	end}
 	use { 'kevinhwang91/nvim-hlslens', config = function()
@@ -193,7 +193,7 @@ return require('packer').startup({function(use)
 	use { 'm-demare/hlargs.nvim', after = 'nvim-treesitter', config = function() require('hlargs').setup() end }
 
 	-- coq
-	use { 'ms-jpq/coq_nvim', branch = 'coq', commit = '84ec5faf2aaf49819e626f64dd94f4e71cf575bc', requires = 'kyazdani42/nvim-web-devicons', setup = function()
+	use { 'ms-jpq/coq_nvim', branch = 'coq', requires = 'kyazdani42/nvim-web-devicons', setup = function()
 		vim.g.coq_settings = { auto_start = 'shut-up', ['keymap.jump_to_mark'] = '<C-\\>', ['keymap.recommended'] = false }
 	end, config = function()
 		require('coq')
